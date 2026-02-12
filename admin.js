@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.79";
+const VERSION = "4.80";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -38,6 +38,10 @@ const adminVoteStats = document.getElementById('admin-vote-stats');
 const adminVoteChart = document.getElementById('admin-vote-chart');
 const resetDbBtn = document.getElementById('reset-db');
 const nextPlayerBtn = document.getElementById('next-player-btn');
+const questionTextEl = document.getElementById('question-text');
+const questionAnswerEl = document.getElementById('question-answer');
+const questionProgressEl = document.getElementById('question-progress');
+const questionSkipBtn = document.getElementById('question-skip');
 
 let roundInterval = null, playerInterval = null, voteInterval = null;
 let currentRoundTime = 150, currentPlayerTime = 30, currentVoteTime = 60;
@@ -46,11 +50,40 @@ let currentMode = "time";
 let currentTimeLimit = 150;
 let currentMaxQuestions = 5;
 let currentPlayerPerQuestion = 30;
+let questionDeck = [];
+let currentQuestionIndex = -1;
 
 const formatTime = (t) => {
     const m = Math.floor(t / 60); const s = t % 60;
     return `${m}:${s < 10 ? '0' + s : s}`;
 };
+
+const shuffleArray = (arr) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+};
+
+function showNextQuestion() {
+    if (!questionTextEl || !questionAnswerEl || !questionProgressEl) return;
+    if (!questionDeck || questionDeck.length === 0) {
+        questionTextEl.textContent = "Keine Fragen geladen.";
+        questionAnswerEl.textContent = "";
+        questionProgressEl.textContent = "";
+        return;
+    }
+    currentQuestionIndex++;
+    if (currentQuestionIndex >= questionDeck.length) {
+        currentQuestionIndex = 0;
+    }
+    const q = questionDeck[currentQuestionIndex];
+    questionTextEl.textContent = q.frage;
+    questionAnswerEl.textContent = `Antwort: ${q.antwort}`;
+    questionProgressEl.textContent = `Frage ${currentQuestionIndex + 1} von ${questionDeck.length}`;
+}
 
 // --- TIMER ENGINE ---
 function startLogic() {
@@ -84,6 +117,26 @@ function startLogic() {
             if (currentPlayerTime === 0) window.skipPlayer();
         }
     }, 1000);
+}
+
+// --- FRAGEN-KATALOG LADEN ---
+fetch('./fragen.json')
+    .then(r => r.json())
+    .then(data => {
+        if (Array.isArray(data) && data.length) {
+            questionDeck = shuffleArray(data);
+            currentQuestionIndex = -1;
+            showNextQuestion();
+        }
+    })
+    .catch(() => {
+        if (questionTextEl) {
+            questionTextEl.textContent = "Fragen konnten nicht geladen werden.";
+        }
+    });
+
+if (questionSkipBtn) {
+    questionSkipBtn.onclick = () => showNextQuestion();
 }
 
 function stopLogic() {
@@ -501,6 +554,7 @@ startRoundBtn.onclick = () => {
             ids.forEach(id => {
                 if ((p[id].lives || 0) > 0) {
                     updates[`players/${id}/questionsLeft`] = currentMaxQuestions;
+                    updates[`players/${id}/chatDisabled`] = false;
                 }
             });
             if (Object.keys(updates).length) update(ref(db), updates);
@@ -553,6 +607,9 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
                 : (settings.maxQuestions || currentMaxQuestions || 0);
             const nextQ = Math.max(0, currentQ - 1);
             updates[`players/${currentId}/questionsLeft`] = nextQ;
+            if (nextQ === 0) {
+                updates[`players/${currentId}/chatDisabled`] = true;
+            }
         }
 
         // alle erstmal nicht dran
@@ -574,7 +631,7 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
         if (!nextId) nextId = currentId; // Fallback, falls alle tot
 
         updates[`players/${nextId}/isDran`] = true;
-        updates['gameState/playerTimer'] = 30;
+        updates['gameState/playerTimer'] = currentPlayerPerQuestion;
         if (flash) {
             updates['gameState/flashEffect'] = flash;
         }
@@ -585,6 +642,8 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
                     update(ref(db, 'gameState'), { flashEffect: null });
                 }, 1200);
             }
+            // Nach erfolgreichem Spielerwechsel neue Frage anzeigen
+            showNextQuestion();
         });
     }, { onlyOnce: true });
 }

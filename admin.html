@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ADMIN | v4.79</title>
+    <title>ADMIN | v4.80</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center border-b border-red-900 pb-4 mb-6">
             <div>
                 <h1 class="text-xl font-black text-red-600 uppercase italic">Admin Panel</h1>
-                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.79</p>
+                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.80</p>
             </div>
             <div class="flex items-center gap-6">
                 <div id="admin-round-status" class="text-[9px] font-black uppercase px-3 py-1 rounded-full bg-white/10 text-white/70">—</div>
@@ -31,6 +31,27 @@
             </div>
 
             <div class="space-y-6">
+                <!-- Quiz-Frage Box -->
+                <div class="bg-white/5 p-4 rounded-3xl border border-white/10 shadow-lg shadow-black/40 space-y-2">
+                    <div class="flex items-center justify-between gap-3 mb-1">
+                        <div class="text-[10px] font-black uppercase tracking-[0.25em] text-white/60">Quiz-Frage</div>
+                        <div id="question-progress" class="text-[9px] text-white/40 font-mono">Frage – von –</div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <div class="flex-1">
+                            <p id="question-text" class="text-sm font-semibold text-white leading-snug">
+                                Frage wird geladen…
+                            </p>
+                            <p id="question-answer" class="text-[11px] text-white/40 mt-1 italic">
+                                Antwort (nur für Admin sichtbar)
+                            </p>
+                        </div>
+                        <button id="question-skip" class="shrink-0 h-8 w-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-[11px] font-black uppercase tracking-[0.2em]">
+                            ⇄
+                        </button>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-2 gap-2">
                     <button onclick="window.answerAndNext(true)" class="bg-green-600 hover:bg-green-500 py-8 rounded-2xl font-black text-xs uppercase shadow-lg shadow-green-900/20 active:scale-95 transition-all">✓ RICHTIG<br><span class="opacity-50 text-[8px] lowercase">und weiter</span></button>
                     <button onclick="window.answerAndNext(false)" class="bg-red-600 hover:bg-red-500 py-8 rounded-2xl font-black text-xs uppercase shadow-lg shadow-red-900/20 active:scale-95 transition-all">✕ FALSCH<br><span class="opacity-50 text-[8px] lowercase">und weiter</span></button>
@@ -119,6 +140,6 @@
         </div>
     </div>
 
-    <script type="module" src="admin.js?v=4.79"></script>
+    <script type="module" src="admin.js?v=4.80"></script>
 </body>
 </html>

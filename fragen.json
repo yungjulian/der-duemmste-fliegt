@@ -1,0 +1,2102 @@
+[
+  {
+    "id": 1,
+    "frage": "Welcher Planet ist der Sonne am nächsten?",
+    "antwort": "Merkur",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 2,
+    "frage": "Wie viele Bundesländer hat Deutschland?",
+    "antwort": "16",
+    "kategorie": "Politik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 3,
+    "frage": "In welchem Land stehen die Pyramiden von Gizeh?",
+    "antwort": "Ägypten",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 4,
+    "frage": "Aus wie vielen Linien besteht das Logo von Adidas?",
+    "antwort": "Drei",
+    "kategorie": "Marken",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 5,
+    "frage": "Welches Metall ist bei Raumtemperatur flüssig?",
+    "antwort": "Quecksilber",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 6,
+    "frage": "Wer malte die \"Mona Lisa\"?",
+    "antwort": "Leonardo da Vinci",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 7,
+    "frage": "Wie viele Kontinente gibt es auf der Erde?",
+    "antwort": "7",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 8,
+    "frage": "Welches ist das größte Säugetier der Welt?",
+    "antwort": "Blauwal",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 9,
+    "frage": "In welcher Stadt befindet sich der Eiffelturm?",
+    "antwort": "Paris",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 10,
+    "frage": "Wie heißt die Währung in Japan?",
+    "antwort": "Yen",
+    "kategorie": "Finanzen",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 11,
+    "frage": "Was ist die Hauptstadt von Italien?",
+    "antwort": "Rom",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 12,
+    "frage": "Welches Organ pumpt Blut durch den Körper?",
+    "antwort": "Herz",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 13,
+    "frage": "Wie viele Zähne hat ein erwachsener Mensch normalerweise?",
+    "antwort": "32",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 14,
+    "frage": "Welches Element hat das Symbol 'O'?",
+    "antwort": "Sauerstoff",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 15,
+    "frage": "Wer erfand die Glühbirne?",
+    "antwort": "Thomas Edison",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 16,
+    "frage": "Wie viele Saiten hat eine Standard-Gitarre?",
+    "antwort": "6",
+    "kategorie": "Musik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 17,
+    "frage": "Welches Land ist flächenmäßig das größte der Welt?",
+    "antwort": "Russland",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 18,
+    "frage": "In welchem Ozean versank die Titanic?",
+    "antwort": "Atlantik",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 19,
+    "frage": "Was ist das weiße im Ei?",
+    "antwort": "Eiweiß (Eiklar)",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 20,
+    "frage": "Wie viele Jahre hat ein Jahrzehnt?",
+    "antwort": "10",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 21,
+    "frage": "Wer ist der aktuelle Bundeskanzler von Deutschland?",
+    "antwort": "Olaf Scholz",
+    "kategorie": "Politik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 22,
+    "frage": "Welches Tier ist das Wahrzeichen von Berlin?",
+    "antwort": "Bär",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 23,
+    "frage": "Was ist der längste Fluss der Welt?",
+    "antwort": "Nil (Amazonas wird oft auch akzeptiert)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 24,
+    "frage": "Was ist die Hauptstadt von Spanien?",
+    "antwort": "Madrid",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 25,
+    "frage": "Welches Märchenmädchen verliert einen Schuh?",
+    "antwort": "Aschenputtel",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 26,
+    "frage": "Wie viele Farben hat ein Regenbogen?",
+    "antwort": "7",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 27,
+    "frage": "Welches Tier liefert Wolle?",
+    "antwort": "Schaf",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 28,
+    "frage": "In welcher Stadt steht das Brandenburger Tor?",
+    "antwort": "Berlin",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 29,
+    "frage": "Wer war der erste Mensch auf dem Mond?",
+    "antwort": "Neil Armstrong",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 30,
+    "frage": "Welches Land gewann die Fußball-WM 2014?",
+    "antwort": "Deutschland",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 31,
+    "frage": "Was ist die chemische Formel für Wasser?",
+    "antwort": "H2O",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 32,
+    "frage": "Welcher Monat hat als einziger weniger als 30 Tage?",
+    "antwort": "Februar",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 33,
+    "frage": "Wie heißt der höchste Berg der Welt?",
+    "antwort": "Mount Everest",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 34,
+    "frage": "Welches Instrument spielt man mit Tasten und Pedalen?",
+    "antwort": "Klavier",
+    "kategorie": "Musik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 35,
+    "frage": "In welcher Himmelsrichtung geht die Sonne auf?",
+    "antwort": "Osten",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 36,
+    "frage": "Was ist der kleinste Kontinent der Welt?",
+    "antwort": "Australien",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 37,
+    "frage": "Wie viele Sekunden hat eine Minute?",
+    "antwort": "60",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 38,
+    "frage": "Wer schrieb \"Die Verwandlung\"?",
+    "antwort": "Franz Kafka",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 39,
+    "frage": "Wie nennt man die Lehre von den Lebewesen?",
+    "antwort": "Biologie",
+    "kategorie": "Wissenschaft",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 40,
+    "frage": "Welches Vitamin produziert die Haut durch Sonnenlicht?",
+    "antwort": "Vitamin D",
+    "kategorie": "Gesundheit",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 41,
+    "frage": "Wie heißt die Hauptstadt von Portugal?",
+    "antwort": "Lissabon",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 42,
+    "frage": "Welcher Stoff macht die Pflanzen grün?",
+    "antwort": "Chlorophyll",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 43,
+    "frage": "Wer ist der Schöpfer von Micky Maus?",
+    "antwort": "Walt Disney",
+    "kategorie": "Popkultur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 44,
+    "frage": "Welches Land grenzt im Norden an die USA?",
+    "antwort": "Kanada",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 45,
+    "frage": "Wie viele Knochen hat ein erwachsener Mensch?",
+    "antwort": "206",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 46,
+    "frage": "Was ist das größte Organ des menschlichen Körpers?",
+    "antwort": "Die Haut",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 47,
+    "frage": "Wie viele Weltmeere gibt es?",
+    "antwort": "5",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 48,
+    "frage": "Wer war der erste US-Präsident?",
+    "antwort": "George Washington",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 49,
+    "frage": "In welchem Land liegt der Amazonas-Regenwald zum größten Teil?",
+    "antwort": "Brasilien",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 50,
+    "frage": "Wie nennt man ein männliches Schwein?",
+    "antwort": "Eber",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 51,
+    "frage": "Wie viele Nullen hat eine Milliarde?",
+    "antwort": "9",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 52,
+    "frage": "Welches Land hat die längste Küste der Welt?",
+    "antwort": "Kanada",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 53,
+    "frage": "Welches Gas macht den größten Teil unserer Atemluft aus?",
+    "antwort": "Stickstoff",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 54,
+    "frage": "Wie hieß das Schiff von Charles Darwin?",
+    "antwort": "HMS Beagle",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 55,
+    "frage": "In welchem Land wurde der Buchdruck erfunden?",
+    "antwort": "Deutschland",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 56,
+    "frage": "Wer ist der griechische Gott des Meeres?",
+    "antwort": "Poseidon",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 57,
+    "frage": "Welches Land schenkte den USA die Freiheitsstatue?",
+    "antwort": "Frankreich",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 58,
+    "frage": "Wie heißt die Hauptstadt von Schottland?",
+    "antwort": "Edinburgh",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 59,
+    "frage": "Was ist das härteste natürliche Material?",
+    "antwort": "Diamant",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 60,
+    "frage": "Welches Tier wird \"Wüstenschiff\" genannt?",
+    "antwort": "Kamel",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 61,
+    "frage": "Wer schrieb das Tagebuch der Anne Frank?",
+    "antwort": "Anne Frank",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 62,
+    "frage": "Wie viele Bundespräsidenten hat Deutschland zeitgleich?",
+    "antwort": "Einen",
+    "kategorie": "Politik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 63,
+    "frage": "In welcher Stadt steht der schiefe Turm?",
+    "antwort": "Pisa",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 64,
+    "frage": "Wie heißt das kleinste EU-Land?",
+    "antwort": "Malta",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 65,
+    "frage": "Wer malte die Decke der Sixtinischen Kapelle?",
+    "antwort": "Michelangelo",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 66,
+    "frage": "Welches Land ist das \"Land der aufgehenden Sonne\"?",
+    "antwort": "Japan",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 67,
+    "frage": "Wie viele Feldspieler hat ein Fußballteam?",
+    "antwort": "10",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 68,
+    "frage": "Was ist das chemische Symbol für Silber?",
+    "antwort": "Ag",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 69,
+    "frage": "Welcher Fluss fließt durch London?",
+    "antwort": "Themse",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 70,
+    "frage": "Wie heißt die größte Wüste der Welt?",
+    "antwort": "Antarktis (Kältewüste)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 71,
+    "frage": "Wie viele Ringe hat die olympische Flagge?",
+    "antwort": "5",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 72,
+    "frage": "Wer entdeckte das Penicillin?",
+    "antwort": "Alexander Fleming",
+    "kategorie": "Medizin",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 73,
+    "frage": "Wie heißt der größte See der Welt?",
+    "antwort": "Kaspisches Meer",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 74,
+    "frage": "Wo fand die erste Fußball-WM 1930 statt?",
+    "antwort": "Uruguay",
+    "kategorie": "Sport",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 75,
+    "frage": "Wer schrieb Harry Potter?",
+    "antwort": "J.K. Rowling",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 76,
+    "frage": "Was ist die Hauptstadt von Brasilien?",
+    "antwort": "Brasília",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 77,
+    "frage": "Wie heißt die Verwandlung der Raupe?",
+    "antwort": "Metamorphose",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 78,
+    "frage": "Welches Land hat die meisten Einwohner?",
+    "antwort": "Indien",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 79,
+    "frage": "Wer komponierte die \"Ode an die Freude\"?",
+    "antwort": "Beethoven",
+    "kategorie": "Musik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 80,
+    "frage": "Wie viele Planeten im System haben Ringe?",
+    "antwort": "4 (Saturn, Jupiter, Uranus, Neptun)",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 81,
+    "frage": "Was ist die Hauptstadt von Kanada?",
+    "antwort": "Ottawa",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 82,
+    "frage": "Welches Land hat das Kennzeichen \"CH\"?",
+    "antwort": "Schweiz",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 83,
+    "frage": "Wie viele Tasten hat ein Klavier?",
+    "antwort": "88",
+    "kategorie": "Musik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 84,
+    "frage": "Wer entwickelte die Relativitätstheorie?",
+    "antwort": "Albert Einstein",
+    "kategorie": "Physik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 85,
+    "frage": "Amtssprache in Argentinien?",
+    "antwort": "Spanisch",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 86,
+    "frage": "Größtes lebendes Reptil?",
+    "antwort": "Salzwasserkrokodil",
+    "kategorie": "Natur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 87,
+    "frage": "Schutzschicht gegen UV-Strahlung?",
+    "antwort": "Ozonschicht",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 88,
+    "frage": "Einführung des Euro-Bargelds?",
+    "antwort": "2002",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 89,
+    "frage": "Legendärer König von Camelot?",
+    "antwort": "König Artus",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 90,
+    "frage": "Wie viele Milliliter sind ein Liter?",
+    "antwort": "1000",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 91,
+    "frage": "Hauptstadt der Türkei?",
+    "antwort": "Ankara",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 92,
+    "frage": "Gebirge zwischen Europa und Asien?",
+    "antwort": "Ural",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 93,
+    "frage": "Element für Sauerstofftransport im Blut?",
+    "antwort": "Eisen",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 94,
+    "frage": "Wer schrieb \"Faust\"?",
+    "antwort": "Goethe",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 95,
+    "frage": "Wie viele Augen hat eine Spinne meist?",
+    "antwort": "8",
+    "kategorie": "Natur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 96,
+    "frage": "Farben der schwedischen Flagge?",
+    "antwort": "Blau und Gelb",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 97,
+    "frage": "Erste Frau im Weltraum?",
+    "antwort": "Walentina Tereschkowa",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 98,
+    "frage": "Größte Insel der Welt?",
+    "antwort": "Grönland",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 99,
+    "frage": "In welchem Jahr sank die Titanic?",
+    "antwort": "1912",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 100,
+    "frage": "Vitamin in Zitrusfrüchten?",
+    "antwort": "Vitamin C",
+    "kategorie": "Gesundheit",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 101,
+    "frage": "Wie viele Zylinder hat ein Boxermotor im Porsche 911 meist?",
+    "antwort": "6",
+    "kategorie": "Technik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 102,
+    "frage": "Hauptstadt von Vietnam?",
+    "antwort": "Hanoi",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 103,
+    "frage": "Welcher Maler schnitt sich ein Ohr ab?",
+    "antwort": "Vincent van Gogh",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 104,
+    "frage": "Woraus besteht Glas hauptsächlich?",
+    "antwort": "Quarzsand",
+    "kategorie": "Technik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 105,
+    "frage": "Wer ist der Gott des Donners in der nordischen Mythologie?",
+    "antwort": "Thor",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 106,
+    "frage": "Wie viele Bits sind ein Byte?",
+    "antwort": "8",
+    "kategorie": "Informatik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 107,
+    "frage": "In welchem Land wurde der Caesar Salad erfunden?",
+    "antwort": "Mexiko",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 108,
+    "frage": "Wie heißt die Hauptstadt von Marokko?",
+    "antwort": "Rabat",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 109,
+    "frage": "Welches Organ produziert Insulin?",
+    "antwort": "Bauchspeicheldrüse",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 110,
+    "frage": "Wie viele Sekunden hat eine Stunde?",
+    "antwort": "3600",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 111,
+    "frage": "Wer schrieb \"Krieg und Frieden\"?",
+    "antwort": "Leo Tolstoi",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 112,
+    "frage": "Härtestes Gestein der Erde?",
+    "antwort": "Diamant",
+    "kategorie": "Geologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 113,
+    "frage": "In welchem Jahr endete der 30-jährige Krieg?",
+    "antwort": "1648",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 114,
+    "frage": "Hauptstadt von Island?",
+    "antwort": "Reykjavík",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 115,
+    "frage": "Welches Element hat das Symbol \"Fe\"?",
+    "antwort": "Eisen",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 116,
+    "frage": "Wer war der \"Sonnenkönig\"?",
+    "antwort": "Ludwig XIV.",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 117,
+    "frage": "Welcher Ozean liegt zwischen Afrika und Australien?",
+    "antwort": "Indischer Ozean",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 118,
+    "frage": "Was bedeutet die Abkürzung \"URL\"?",
+    "antwort": "Uniform Resource Locator",
+    "kategorie": "Informatik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 119,
+    "frage": "Wie viele Spieler hat ein Volleyballteam auf dem Feld?",
+    "antwort": "6",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 120,
+    "frage": "Wer malte \"Der Schrei\"?",
+    "antwort": "Edvard Munch",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 121,
+    "frage": "Hauptstadt von Finnland?",
+    "antwort": "Helsinki",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 122,
+    "frage": "Wie viele Planeten hat unser Sonnensystem?",
+    "antwort": "8",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 123,
+    "frage": "Wer entdeckte Amerika (offiziell 1492)?",
+    "antwort": "Christoph Kolumbus",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 124,
+    "frage": "Wie viele Wochen hat ein Jahr?",
+    "antwort": "52",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 125,
+    "frage": "Woraus wird Rum gemacht?",
+    "antwort": "Zuckerrohr",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 126,
+    "frage": "Höchster Berg Europas?",
+    "antwort": "Mont Blanc (Elbrus wird oft auch gezählt)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 127,
+    "frage": "Welches Tier ist der \"König der Tiere\"?",
+    "antwort": "Löwe",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 128,
+    "frage": "Was ist das Symbol für Gold?",
+    "antwort": "Au",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 129,
+    "frage": "Hauptstadt von Polen?",
+    "antwort": "Warschau",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 130,
+    "frage": "Wer schrieb \"Sherlock Holmes\"?",
+    "antwort": "Arthur Conan Doyle",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 131,
+    "frage": "Was ist die größte Primzahl unter 10?",
+    "antwort": "7",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 132,
+    "frage": "In welchem Land liegt die Ruinenstadt Machu Picchu?",
+    "antwort": "Peru",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 133,
+    "frage": "Wie heißt das kleinste Knöchelchen im menschlichen Körper?",
+    "antwort": "Steigbügel",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 134,
+    "frage": "In welchem Jahr begann die Französische Revolution?",
+    "antwort": "1789",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 135,
+    "frage": "Was ist die Hauptstadt von Südkorea?",
+    "antwort": "Seoul",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 136,
+    "frage": "Welcher Planet wird der \"rote Planet\" genannt?",
+    "antwort": "Mars",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 137,
+    "frage": "Wie viele Taler bekam Judas für den Verrat an Jesus?",
+    "antwort": "30 Silberlinge",
+    "kategorie": "Religion",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 138,
+    "frage": "Welches Land erfand das Papier?",
+    "antwort": "China",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 139,
+    "frage": "Was ist die Hauptstadt von Ägypten?",
+    "antwort": "Kairo",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 140,
+    "frage": "Wer ist der Autor von \"Der kleine Prinz\"?",
+    "antwort": "Antoine de Saint-Exupéry",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 141,
+    "frage": "Wie viele Atemzüge macht ein Mensch pro Minute (Ruhe)?",
+    "antwort": "12-18",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 142,
+    "frage": "In welchem Jahr fiel die Berliner Mauer?",
+    "antwort": "1889",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 143,
+    "frage": "Wie heißt die Hauptstadt von Thailand?",
+    "antwort": "Bangkok",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 144,
+    "frage": "Wer erfand das Telefon?",
+    "antwort": "Alexander Graham Bell",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 145,
+    "frage": "Woraus wird Tofu gemacht?",
+    "antwort": "Sojabohnen",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 146,
+    "frage": "Wie viele Bundesländer hat Österreich?",
+    "antwort": "9",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 147,
+    "frage": "Was ist die Hauptstadt von Griechenland?",
+    "antwort": "Athen",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 148,
+    "frage": "Welches Tier kann seinen Kopf um 270 Grad drehen?",
+    "antwort": "Eule",
+    "kategorie": "Natur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 149,
+    "frage": "Wie heißt das Parlament von Israel?",
+    "antwort": "Knesset",
+    "kategorie": "Politik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 150,
+    "frage": "Welches Element hat das Symbol \"K\"?",
+    "antwort": "Kalium",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 151,
+    "frage": "Wie viele Herzen hat ein Oktopus?",
+    "antwort": "3",
+    "kategorie": "Natur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 152,
+    "frage": "Hauptstadt von Kroatien?",
+    "antwort": "Zagreb",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 153,
+    "frage": "In welchem Jahr landete Apollo 11 auf dem Mond?",
+    "antwort": "1969",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 154,
+    "frage": "Welcher Fluss fließt durch Rom?",
+    "antwort": "Tiber",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 155,
+    "frage": "Wie viele Felder hat ein Schachbrett?",
+    "antwort": "64",
+    "kategorie": "Spiele",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 156,
+    "frage": "Wer schrieb \"Die Odyssee\"?",
+    "antwort": "Homer",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 157,
+    "frage": "Hauptstadt von Schweden?",
+    "antwort": "Stockholm",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 158,
+    "frage": "Wie viele Millimeter sind ein Zentimeter?",
+    "antwort": "10",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 159,
+    "frage": "Wer war die \"Eiserne Lady\"?",
+    "antwort": "Margaret Thatcher",
+    "kategorie": "Politik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 160,
+    "frage": "Woraus besteht ein Diamant chemisch?",
+    "antwort": "Kohlenstoff",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 161,
+    "frage": "Größtes Land Südamerikas?",
+    "antwort": "Brasilien",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 162,
+    "frage": "Wie heißt der Gott des Weines (Römisch)?",
+    "antwort": "Bacchus",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 163,
+    "frage": "Hauptstadt von Indien?",
+    "antwort": "Neu-Delhi",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 164,
+    "frage": "Wer erfand die Relativitätstheorie?",
+    "antwort": "Albert Einstein",
+    "kategorie": "Physik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 165,
+    "frage": "Wie viele Ecken hat ein Stoppschild?",
+    "antwort": "8 (Oktogon)",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 166,
+    "frage": "In welchem Land liegt der Mount Fuji?",
+    "antwort": "Japan",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 167,
+    "frage": "Welches Tier ist der größte Vogel der Welt?",
+    "antwort": "Strauß",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 168,
+    "frage": "Wie heißt die Hauptstadt von Irland?",
+    "antwort": "Dublin",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 169,
+    "frage": "Was ist das Symbol für Blei?",
+    "antwort": "Pb",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 170,
+    "frage": "Wer schrieb \"Romeo und Julia\"?",
+    "antwort": "Shakespeare",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 171,
+    "frage": "Wie viele Bundesstaaten haben die USA?",
+    "antwort": "50",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 172,
+    "frage": "Wer war \"Sissi\"?",
+    "antwort": "Kaiserin Elisabeth von Österreich",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 173,
+    "frage": "Was ist das Nationalgericht von Japan?",
+    "antwort": "Sushi (oder Ramen)",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 174,
+    "frage": "Hauptstadt von Belgien?",
+    "antwort": "Brüssel",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 175,
+    "frage": "Wie viele Monate haben 28 Tage?",
+    "antwort": "Alle 12",
+    "kategorie": "Fangfrage",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 176,
+    "frage": "Welches Gas nutzen Pflanzen zum Atmen?",
+    "antwort": "CO2 (Kohlendioxid)",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 177,
+    "frage": "Größte Stadt der Welt (Einwohner)?",
+    "antwort": "Tokio",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 178,
+    "frage": "Wer entdeckte die Schwerkraft?",
+    "antwort": "Isaac Newton",
+    "kategorie": "Physik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 179,
+    "frage": "Was ist die Hauptstadt von Argentinien?",
+    "antwort": "Buenos Aires",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 180,
+    "frage": "In welchem Land wurde Arnold Schwarzenegger geboren?",
+    "antwort": "Österreich",
+    "kategorie": "Popkultur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 181,
+    "frage": "Welche Farbe hat ein Saphir meistens?",
+    "antwort": "Blau",
+    "kategorie": "Geologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 182,
+    "frage": "Wie viele Kontinente beginnen mit \"A\"?",
+    "antwort": "4 (Afrika, Asien, Antarktis, Australien)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 183,
+    "frage": "Hauptstadt von Norwegen?",
+    "antwort": "Oslo",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 184,
+    "frage": "Wer schrieb \"Don Quijote\"?",
+    "antwort": "Miguel de Cervantes",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 185,
+    "frage": "Was ist das Symbol für Natrium?",
+    "antwort": "Na",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 186,
+    "frage": "Wie viele Jahre dauerte der Hundertjährige Krieg?",
+    "antwort": "116 Jahre",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 187,
+    "frage": "Hauptstadt von Ungarn?",
+    "antwort": "Budapest",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 188,
+    "frage": "Wie viele Protonen hat Wasserstoff?",
+    "antwort": "1",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 189,
+    "frage": "Wer malte die \"Guernica\"?",
+    "antwort": "Pablo Picasso",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 190,
+    "frage": "Wie heißt die Hauptstadt von Kuba?",
+    "antwort": "Havanna",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 191,
+    "frage": "Woraus wird Glas gemacht?",
+    "antwort": "Sand",
+    "kategorie": "Technik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 192,
+    "frage": "Wie viele Planeten haben keine Monde?",
+    "antwort": "2 (Merkur, Venus)",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 193,
+    "frage": "Größter Wasserfall der Welt (Höhe)?",
+    "antwort": "Angel Falls",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 194,
+    "frage": "Hauptstadt von Tschechien?",
+    "antwort": "Prag",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 195,
+    "frage": "Wie nennt man ein junges Pferd?",
+    "antwort": "Fohlen",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 196,
+    "frage": "Wer war der Gott des Krieges (Griechisch)?",
+    "antwort": "Ares",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 197,
+    "frage": "In welchem Jahr endete der 2. Weltkrieg?",
+    "antwort": "1945",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 198,
+    "frage": "Wie heißt die Hauptstadt von Kenia?",
+    "antwort": "Nairobi",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 199,
+    "frage": "Wie viele Tage hat ein Schaltjahr?",
+    "antwort": "366",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 200,
+    "frage": "Wer schrieb \"Der Steppenwolf\"?",
+    "antwort": "Hermann Hesse",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 201,
+    "frage": "Hauptstadt von Kolumbien?",
+    "antwort": "Bogotá",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 202,
+    "frage": "Was ist das Symbol für Kupfer?",
+    "antwort": "Cu",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 203,
+    "frage": "Wie viele Lungenflügel hat ein Mensch?",
+    "antwort": "2",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 204,
+    "frage": "Wer erfand das Dynamit?",
+    "antwort": "Alfred Nobel",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 205,
+    "frage": "Größte Stadt Kanadas?",
+    "antwort": "Toronto",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 206,
+    "frage": "Hauptstadt von Südafrika (eine davon)?",
+    "antwort": "Pretoria (auch Kapstadt/Bloemfontein)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 207,
+    "frage": "Wie viele Tausender hat eine Million?",
+    "antwort": "1000",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 208,
+    "frage": "Wer war der \"Wüstenfuchs\"?",
+    "antwort": "Erwin Rommel",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 209,
+    "frage": "In welchem Meer liegt Mallorca?",
+    "antwort": "Mittelmeer",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 210,
+    "frage": "Wie heißt die Hauptstadt von Peru?",
+    "antwort": "Lima",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 211,
+    "frage": "Welcher Planet ist der kälteste?",
+    "antwort": "Neptun (manchmal Uranus)",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 212,
+    "frage": "Wer schrieb \"Die Blechtrommel\"?",
+    "antwort": "Günter Grass",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 213,
+    "frage": "Woraus besteht die Sonne hauptsächlich?",
+    "antwort": "Wasserstoff",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 214,
+    "frage": "Hauptstadt von Dänemark?",
+    "antwort": "Kopenhagen",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 215,
+    "frage": "Wie viele Spieler hat ein Handballteam (Feld)?",
+    "antwort": "7",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 216,
+    "frage": "Was ist das Symbol für Zinn?",
+    "antwort": "Sn",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 217,
+    "frage": "In welchem Jahr wurde die UN gegründet?",
+    "antwort": "1945",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 218,
+    "frage": "Hauptstadt von Rumänien?",
+    "antwort": "Bukarest",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 219,
+    "frage": "Wer ist der \"King of Pop\"?",
+    "antwort": "Michael Jackson",
+    "kategorie": "Musik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 220,
+    "frage": "Wie viele Farben hat die Flagge von Italien?",
+    "antwort": "3",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 221,
+    "frage": "Wie heißt die Hauptstadt von China?",
+    "antwort": "Peking",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 222,
+    "frage": "Welches Metall ist im Hämoglobin?",
+    "antwort": "Eisen",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 223,
+    "frage": "Wer schrieb \"Der Vorleser\"?",
+    "antwort": "Bernhard Schlink",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 224,
+    "frage": "Wie viele Beine hat ein Insekt?",
+    "antwort": "6",
+    "kategorie": "Natur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 225,
+    "frage": "Hauptstadt von Luxemburg?",
+    "antwort": "Luxemburg",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 226,
+    "frage": "Was ist die Quadratwurzel aus 144?",
+    "antwort": "12",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 227,
+    "frage": "In welchem Land liegt der Kilimandscharo?",
+    "antwort": "Tansania",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 228,
+    "frage": "Wer malte \"Das Abendmahl\"?",
+    "antwort": "Leonardo da Vinci",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 229,
+    "frage": "Wie heißt die Hauptstadt von Mexiko?",
+    "antwort": "Mexiko-Stadt",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 230,
+    "frage": "Wie viele Zähne hat ein Kind (Milchgebiss)?",
+    "antwort": "20",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 231,
+    "frage": "Welcher Stoff wird im Körper in Vitamin A umgewandelt?",
+    "antwort": "Beta-Carotin",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 232,
+    "frage": "Hauptstadt von Iran?",
+    "antwort": "Teheran",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 233,
+    "frage": "Wer ist der Gott des Lichts (Griechisch)?",
+    "antwort": "Apollo",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 234,
+    "frage": "Wie viele Sterne hat die EU-Flagge?",
+    "antwort": "12",
+    "kategorie": "Politik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 235,
+    "frage": "In welchem Jahr wurde die Mauer gebaut?",
+    "antwort": "1961",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 236,
+    "frage": "Hauptstadt von Bulgarien?",
+    "antwort": "Sofia",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 237,
+    "frage": "Wer schrieb \"Moby Dick\"?",
+    "antwort": "Herman Melville",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 238,
+    "frage": "Wie viele Kilometer sind ein Marathon?",
+    "antwort": "42,195 km",
+    "kategorie": "Sport",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 239,
+    "frage": "Was ist das Symbol für Quecksilber?",
+    "antwort": "Hg",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 240,
+    "frage": "Wie heißt die Hauptstadt von Chile?",
+    "antwort": "Santiago",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 241,
+    "frage": "Woraus wird Marzipan gemacht?",
+    "antwort": "Mandeln",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 242,
+    "frage": "Wer war der Sonnenkönig?",
+    "antwort": "Ludwig XIV.",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 243,
+    "frage": "In welchem Land fließen Euphrat und Tigris zusammen?",
+    "antwort": "Irak",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 244,
+    "frage": "Hauptstadt von Neuseeland?",
+    "antwort": "Wellington",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 245,
+    "frage": "Wie viele Karten hat ein Skatblatt?",
+    "antwort": "32",
+    "kategorie": "Spiele",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 246,
+    "frage": "Wer schrieb \"Die unendliche Geschichte\"?",
+    "antwort": "Michael Ende",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 247,
+    "frage": "Wie heißt die Hauptstadt von Saudi-Arabien?",
+    "antwort": "Riad",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 248,
+    "frage": "Was ist das chemische Symbol für Stickstoff?",
+    "antwort": "N",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 249,
+    "frage": "Welches Tier ist das schnellste der Welt?",
+    "antwort": "Wanderfalke (Gepard an Land)",
+    "kategorie": "Natur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 250,
+    "frage": "Hauptstadt von Albanien?",
+    "antwort": "Tirana",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 251,
+    "frage": "Wie viele Bit hat ein Kilobit?",
+    "antwort": "1000 (oder 1024)",
+    "kategorie": "Informatik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 252,
+    "frage": "Wer malte \"Die Beständigkeit der Erinnerung\" (Uhren)?",
+    "antwort": "Salvador Dalí",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 253,
+    "frage": "Wie heißt die Hauptstadt von Südafrika (Sitz der Regierung)?",
+    "antwort": "Pretoria",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 254,
+    "frage": "Wie viele Millimeter sind ein Meter?",
+    "antwort": "1000",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 255,
+    "frage": "Wer war die Göttin der Weisheit (Griechisch)?",
+    "antwort": "Athene",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 256,
+    "frage": "In welchem Jahr war die Französische Revolution?",
+    "antwort": "1789",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 257,
+    "frage": "Hauptstadt von Libanon?",
+    "antwort": "Beirut",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 258,
+    "frage": "Wer schrieb \"Das Parfüm\"?",
+    "antwort": "Patrick Süskind",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 259,
+    "frage": "Was ist das Symbol für Helium?",
+    "antwort": "He",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 260,
+    "frage": "Wie viele Saiten hat ein Cello?",
+    "antwort": "4",
+    "kategorie": "Musik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 261,
+    "frage": "Größte Halbinsel der Erde?",
+    "antwort": "Arabische Halbinsel",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 262,
+    "frage": "Hauptstadt von Indonesien?",
+    "antwort": "Jakarta",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 263,
+    "frage": "Wer entdeckte die Radioaktivität?",
+    "antwort": "Henri Becquerel (Marie Curie bekannt)",
+    "kategorie": "Physik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 264,
+    "frage": "Wie viele Monate haben 31 Tage?",
+    "antwort": "7",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 265,
+    "frage": "Woraus besteht Perlmutt?",
+    "antwort": "Kalk",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 266,
+    "frage": "Hauptstadt von Estland?",
+    "antwort": "Tallinn",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 267,
+    "frage": "Wer schrieb \"Oliver Twist\"?",
+    "antwort": "Charles Dickens",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 268,
+    "frage": "Wie viele Rippen hat ein Mensch normalerweise?",
+    "antwort": "12 Paare",
+    "kategorie": "Biologie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 269,
+    "frage": "Was ist das Symbol für Wolfram?",
+    "antwort": "W",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 270,
+    "frage": "Hauptstadt von Philippinen?",
+    "antwort": "Manila",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 271,
+    "frage": "Wer erfand das World Wide Web?",
+    "antwort": "Tim Berners-Lee",
+    "kategorie": "Informatik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 272,
+    "frage": "Wie viele Spieler hat ein Basketballteam (Feld)?",
+    "antwort": "5",
+    "kategorie": "Sport",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 273,
+    "frage": "In welchem Jahr wurde die BRD gegründet?",
+    "antwort": "1949",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 274,
+    "frage": "Hauptstadt von Vietnam?",
+    "antwort": "Hanoi",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 275,
+    "frage": "Wer schrieb \"Der alte Mann und das Meer\"?",
+    "antwort": "Ernest Hemingway",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 276,
+    "frage": "Was ist das Symbol für Kalzium?",
+    "antwort": "Ca",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 277,
+    "frage": "Größtes Tier im Meer (nach dem Blauwal)?",
+    "antwort": "Finnwal",
+    "kategorie": "Natur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 278,
+    "frage": "Hauptstadt von Syrien?",
+    "antwort": "Damaskus",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 279,
+    "frage": "Wie viele Halswirbel hat eine Giraffe?",
+    "antwort": "7 (wie der Mensch)",
+    "kategorie": "Natur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 280,
+    "frage": "Wer malte \"Die Geburt der Venus\"?",
+    "antwort": "Sandro Botticelli",
+    "kategorie": "Kunst",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 281,
+    "frage": "Woraus wird Sake gebraut?",
+    "antwort": "Reis",
+    "kategorie": "Kulinarik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 282,
+    "frage": "Hauptstadt von Mongolei?",
+    "antwort": "Ulaanbaatar",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 283,
+    "frage": "Wer war der Gott der Unterwelt (Griechisch)?",
+    "antwort": "Hades",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 284,
+    "frage": "Wie viele Bundesräte hat die Schweiz?",
+    "antwort": "7",
+    "kategorie": "Politik",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 285,
+    "frage": "In welchem Jahr endete der 1. Weltkrieg?",
+    "antwort": "1918",
+    "kategorie": "Geschichte",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 286,
+    "frage": "Hauptstadt von Ukraine?",
+    "antwort": "Kiew",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 287,
+    "frage": "Wer schrieb \"Brave New World\"?",
+    "antwort": "Aldous Huxley",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 288,
+    "frage": "Was ist das Symbol für Platin?",
+    "antwort": "Pt",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 289,
+    "frage": "Wie viele Planeten haben Ringe?",
+    "antwort": "4",
+    "kategorie": "Astronomie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 290,
+    "frage": "Hauptstadt von Malaysia?",
+    "antwort": "Kuala Lumpur",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 291,
+    "frage": "Wer erfand das Periodensystem?",
+    "antwort": "Dmitri Mendelejew",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 292,
+    "frage": "Wie viele Zentimeter sind ein Zoll (Inch)?",
+    "antwort": "2,54 cm",
+    "kategorie": "Mathematik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 293,
+    "frage": "Größtes Binnengewässer der Erde?",
+    "antwort": "Kaspisches Meer",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 294,
+    "frage": "Hauptstadt von Pakistan?",
+    "antwort": "Islamabad",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 295,
+    "frage": "Wer schrieb \"Der Prozess\"?",
+    "antwort": "Franz Kafka",
+    "kategorie": "Literatur",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 296,
+    "frage": "Was ist das Symbol für Neon?",
+    "antwort": "Ne",
+    "kategorie": "Chemie",
+    "schwierigkeit": "Leicht"
+  },
+  {
+    "id": 297,
+    "frage": "Wie viele Tasten hat ein Standard-Computerkeyboard?",
+    "antwort": "102-105",
+    "kategorie": "Technik",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 298,
+    "frage": "Hauptstadt von Äthiopien?",
+    "antwort": "Addis Abeba",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Schwer"
+  },
+  {
+    "id": 299,
+    "frage": "Wer war die Göttin der Jagd (Griechisch)?",
+    "antwort": "Artemis",
+    "kategorie": "Mythologie",
+    "schwierigkeit": "Mittel"
+  },
+  {
+    "id": 300,
+    "frage": "Welches Jahr markiert den Beginn des 21. Jahrhunderts?",
+    "antwort": "2001",
+    "kategorie": "Allgemein",
+    "schwierigkeit": "Schwer"
+  }
+]
