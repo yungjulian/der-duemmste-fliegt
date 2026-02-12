@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.7.5";
+const VERSION = "4.75 Hotfix";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -374,10 +374,21 @@ const applySettingsToDb = () => {
     currentTimeLimit = timeLimit;
     currentMaxQuestions = maxQ;
 
+    // Einstellungen speichern
     return update(ref(db, 'settings'), {
         mode,
         timeLimitSeconds: timeLimit,
         maxQuestions: maxQ
+    }).then(() => {
+        // Beim Wechsel des Modus Runde sauber zurücksetzen,
+        // damit alle Clients denselben Zustand haben
+        const initialRoundTime = mode === "time" ? timeLimit : 0;
+        return update(ref(db, 'gameState'), {
+            active: false,
+            isPaused: false,
+            roundTimer: initialRoundTime,
+            playerTimer: 30
+        });
     });
 };
 
