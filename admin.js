@@ -46,6 +46,7 @@ const questionDifficultyEl = document.getElementById('question-difficulty');
 const diffLightInput = document.getElementById('diff-light');
 const diffMediumInput = document.getElementById('diff-medium');
 const diffHardInput = document.getElementById('diff-hard');
+const questionCategoryFiltersEl = document.getElementById('question-category-filters');
 
 let roundInterval = null, playerInterval = null, voteInterval = null;
 let currentRoundTime = 150, currentPlayerTime = 30, currentVoteTime = 60;
@@ -58,6 +59,7 @@ let allQuestions = [];
 let questionDeck = [];
 let currentQuestionIndex = -1;
 let activeDifficulties = { Leicht: true, Mittel: true, Schwer: true };
+let activeCategories = null;
 
 const formatTime = (t) => {
     const m = Math.floor(t / 60); const s = t % 60;
@@ -77,7 +79,10 @@ function rebuildQuestionDeck() {
     if (!allQuestions || !allQuestions.length) return;
     const filtered = allQuestions.filter(q => {
         const diff = q.schwierigkeit || q.schwierigkeit === "" ? q.schwierigkeit : "Leicht";
-        return activeDifficulties[diff] !== false;
+        const cat = q.kategorie || "Allgemein";
+        const diffOk = activeDifficulties[diff] !== false;
+        const catOk = !activeCategories || activeCategories[cat] !== false;
+        return diffOk && catOk;
     });
     questionDeck = shuffleArray(filtered);
     currentQuestionIndex = -1;
@@ -117,6 +122,14 @@ function showNextQuestion() {
             questionDifficultyEl.className = base + "bg-red-900/40 text-red-300 border-red-500/40";
         }
     }
+
+    // Frage für Spieler im GameState speichern (ohne Antwort)
+    update(ref(db, 'gameState'), {
+        currentQuestionId: q.id,
+        currentQuestionText: q.frage,
+        currentQuestionCategory: q.kategorie || null,
+        currentQuestionDifficulty: q.schwierigkeit || null
+    });
 }
 
 // --- TIMER ENGINE ---
@@ -159,6 +172,31 @@ fetch('./fragen.json')
     .then(data => {
         if (Array.isArray(data) && data.length) {
             allQuestions = data;
+            // Kategorien dynamisch aufbauen
+            if (questionCategoryFiltersEl) {
+                questionCategoryFiltersEl.innerHTML = "";
+                const cats = Array.from(new Set(allQuestions.map(q => q.kategorie || "Allgemein"))).sort();
+                activeCategories = {};
+                cats.forEach(cat => {
+                    activeCategories[cat] = true;
+                    const label = document.createElement('label');
+                    label.className = "inline-flex items-center gap-1 cursor-pointer";
+                    const input = document.createElement('input');
+                    input.type = "checkbox";
+                    input.checked = true;
+                    input.className = "accent-sky-500";
+                    input.dataset.category = cat;
+                    input.onchange = () => {
+                        activeCategories[cat] = input.checked;
+                        rebuildQuestionDeck();
+                    };
+                    const span = document.createElement('span');
+                    span.textContent = cat;
+                    label.appendChild(input);
+                    label.appendChild(span);
+                    questionCategoryFiltersEl.appendChild(label);
+                });
+            }
             rebuildQuestionDeck();
         }
     })
