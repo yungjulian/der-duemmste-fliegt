@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.86";
+const VERSION = "4.87";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -677,17 +677,24 @@ startRoundBtn.onclick = () => {
         const firstAlive = ids.find(id => (p[id].lives || 0) > 0);
         if (!hasDran && firstAlive) window.setDran(firstAlive);
 
+        // Richtig/Falsch Zähler für alle Spieler zurücksetzen
+        const updates = {};
+        ids.forEach(id => {
+            updates[`players/${id}/roundCorrect`] = 0;
+            updates[`players/${id}/roundWrong`] = 0;
+        });
+
         // Im Fragen-Modus: questionsLeft für alle lebenden Spieler setzen
         if (currentMode === "questions") {
-            const updates = {};
             ids.forEach(id => {
                 if ((p[id].lives || 0) > 0) {
                     updates[`players/${id}/questionsLeft`] = currentMaxQuestions;
                     updates[`players/${id}/chatDisabled`] = false;
                 }
             });
-            if (Object.keys(updates).length) update(ref(db), updates);
         }
+        
+        if (Object.keys(updates).length) update(ref(db), updates);
     }, { onlyOnce: true });
 };
 
