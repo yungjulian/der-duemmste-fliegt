@@ -2031,10 +2031,10 @@
   },
   {
     "id": 291,
-    "frage": "Wer erfand das Periodensystem?",
-    "antwort": "Dmitri Mendelejew",
-    "kategorie": "Chemie",
-    "schwierigkeit": "Schwer"
+    "frage": "Welcher Berg ist der höchste in Deutschland?",
+    "antwort": "Zugspitze (2962 m)",
+    "kategorie": "Geographie",
+    "schwierigkeit": "Leicht"
   },
   {
     "id": 292,
@@ -2444,9 +2444,9 @@
   },
   {
     "id": 350,
-    "frage": "Was ist die Hauptstadt von Peru?",
-    "antwort": "Lima",
-    "kategorie": "Geographie",
+    "frage": "Welcher Streaming-Dienst hatte 2025 die weltweit meisten Abonnenten?",
+    "antwort": "Netflix (302 Millionen Abonnenten)",
+    "kategorie": "Technik",
     "schwierigkeit": "Leicht"
   },
   {
@@ -2640,9 +2640,9 @@
   },
   {
     "id": 428,
-    "frage": "Wie heißt die Hauptstadt von Kenia?",
-    "antwort": "Nairobi",
-    "kategorie": "Geographie",
+    "frage": "Wie heißt die KI-Firma, die ChatGPT entwickelt hat?",
+    "antwort": "OpenAI",
+    "kategorie": "Technik",
     "schwierigkeit": "Leicht"
   },
   {
@@ -2815,7 +2815,7 @@
   },
   {
     "id": 453,
-    "frage": "Wie viele Jahre hat ein Schaltjahr?",
+    "frage": "Wie viele Tage hat ein Schaltjahr?",
     "antwort": "366 Tage",
     "kategorie": "Allgemein",
     "schwierigkeit": "Leicht"
@@ -3088,9 +3088,9 @@
   },
   {
     "id": 492,
-    "frage": "Wie viele Kammern hat das menschliche Herz?",
-    "antwort": "4",
-    "kategorie": "Biologie",
+    "frage": "Welches Land ist die heimat des Musik-Genres K-Pop?",
+    "antwort": "Südkorea",
+    "kategorie": "Musik",
     "schwierigkeit": "Leicht"
   },
   {
@@ -3130,9 +3130,9 @@
   },
   {
     "id": 498,
-    "frage": "Was ist die Hauptstadt von Peru?",
-    "antwort": "Lima",
-    "kategorie": "Geographie",
+    "frage": "In welchem Rhytmus (alle wie viel Jahre) findet normalerweise ein Schaltjahr statt?",
+    "antwort": "4 Jahre",
+    "kategorie": "Allgemein",
     "schwierigkeit": "Leicht"
   },
   {
@@ -3149,4 +3149,10 @@
     "kategorie": "Geschichte",
     "schwierigkeit": "Mittel"
   }
-]
+]  {
+  "id": 501,
+  "frage": "Welcher Musiker war der Headliner der Super Bowl Halftime Show 2025?",
+  "antwort": "Kendrick Lamar",
+  "kategorie": "Musik",
+  "schwierigkeit": "Leicht"
+}
