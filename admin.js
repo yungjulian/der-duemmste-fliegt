@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.75 Hotfix";
+const VERSION = "4.76";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -54,7 +54,7 @@ function startLogic() {
     if (roundInterval) clearInterval(roundInterval);
     if (playerInterval) clearInterval(playerInterval);
 
-    // Timer nur im Zeit-Modus laufen lassen
+    // Rundentimer nur im Zeit-Modus, Spielertimer immer
     if (currentMode === "time") {
         roundInterval = setInterval(() => {
             if (currentRoundTime > 0) {
@@ -62,15 +62,15 @@ function startLogic() {
                 update(ref(db, 'gameState'), { roundTimer: currentRoundTime });
             }
         }, 1000);
-
-        playerInterval = setInterval(() => {
-            if (currentPlayerTime > 0) {
-                currentPlayerTime--;
-                update(ref(db, 'gameState'), { playerTimer: currentPlayerTime });
-                if (currentPlayerTime === 0) window.skipPlayer();
-            }
-        }, 1000);
     }
+
+    playerInterval = setInterval(() => {
+        if (currentPlayerTime > 0) {
+            currentPlayerTime--;
+            update(ref(db, 'gameState'), { playerTimer: currentPlayerTime });
+            if (currentPlayerTime === 0) window.skipPlayer();
+        }
+    }, 1000);
 }
 
 function stopLogic() {
@@ -232,11 +232,19 @@ onValue(ref(db), (snap) => {
         const rawLives = typeof p.lives === 'number' ? p.lives : 0;
         const hearts = rawLives > 0 ? "❤️".repeat(rawLives) : "☠️";
 
+        // Fragen-Anzeige (nur im Fragen-Modus)
+        const qLeft = currentMode === "questions"
+            ? (typeof p.questionsLeft === "number" ? p.questionsLeft : currentMaxQuestions)
+            : null;
+
         const jokerStar = p.jokerUsed ? "☆" : "⭐";
 
         card.innerHTML = `
             <div class="flex justify-between items-center mb-3">
-                <span class="font-black uppercase text-white ${nameSizeClass}">${p.name}</span>
+                <div class="flex flex-col">
+                    <span class="font-black uppercase text-white ${nameSizeClass}">${p.name}</span>
+                    ${qLeft !== null ? `<span class="text-[9px] text-white/50 uppercase tracking-widest">Fragen: ${qLeft}</span>` : ''}
+                </div>
                 <span class="text-red-500 font-bold flex items-center gap-0.5 whitespace-nowrap">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
             </div>
             <div class="grid grid-cols-2 gap-2">
@@ -465,6 +473,8 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
     onValue(ref(db), (snap) => {
         const data = snap.val() || {};
         const players = data.players || {};
+        const settings = data.settings || {};
+        const mode = settings.mode || currentMode;
         const order = (data.gameState && data.gameState.playerOrder) || Object.keys(players);
         const ids = [...order].filter(id => players[id]);
         if (ids.length === 0) return;
@@ -479,6 +489,15 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
         if (penalizeCurrent && currentId && players[currentId]) {
             const newLives = Math.max(0, (players[currentId].lives || 0) - 1);
             updates[`players/${currentId}/lives`] = newLives;
+        }
+
+        // Im Fragen-Modus: aktuelle Frage des aktiven Spielers verbrauchen
+        if (mode === "questions" && currentId && players[currentId]) {
+            const currentQ = typeof players[currentId].questionsLeft === "number"
+                ? players[currentId].questionsLeft
+                : (settings.maxQuestions || currentMaxQuestions || 0);
+            const nextQ = Math.max(0, currentQ - 1);
+            updates[`players/${currentId}/questionsLeft`] = nextQ;
         }
 
         // alle erstmal nicht dran

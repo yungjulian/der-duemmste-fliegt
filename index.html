@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.75 Hotfix</title>
+    <title>PLAYER | v4.76</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,7 @@
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.75 Hotfix · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.76 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
@@ -411,9 +411,15 @@
 
                 const nameSize = displayName.length > 10 ? 'text-xs' : 'text-sm';
 
+                // Fragen-Anzeige für alle Spieler, wenn Fragen-Modus aktiv
+                const qLeft = mode === "questions"
+                    ? (typeof p.questionsLeft === "number" ? p.questionsLeft : settings.maxQuestions || 0)
+                    : null;
+
                 d.innerHTML = `
                     <div class="flex flex-col">
                         <span class="${nameSize} font-bold text-white">${displayName}</span>
+                        ${qLeft !== null ? `<span class="text-[9px] text-white/50 uppercase tracking-widest">Fragen: ${qLeft}</span>` : ''}
                     </div>
                     <span class="text-red-600 text-[10px] font-bold tracking-widest flex items-center gap-1 whitespace-nowrap">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
                 `;
