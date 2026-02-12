@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.76";
+const VERSION = "4.77";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -60,6 +60,16 @@ function startLogic() {
             if (currentRoundTime > 0) {
                 currentRoundTime--;
                 update(ref(db, 'gameState'), { roundTimer: currentRoundTime });
+
+                // Wenn die Rundenzeit im Zeit-Modus abläuft, Runde automatisch beenden
+                if (currentRoundTime === 0) {
+                    stopLogic();
+                    update(ref(db, 'gameState'), {
+                        active: false,
+                        isPaused: false,
+                        roundTimer: 0
+                    });
+                }
             }
         }, 1000);
     }
@@ -114,6 +124,24 @@ onValue(ref(db), (snap) => {
     currentVoteTime = gs.voteTimer !== undefined ? gs.voteTimer : currentVoteTime;
     roundTimerDisplay.innerText = formatTime(currentRoundTime);
     playerTimerDisplay.innerText = currentPlayerTime;
+
+    // Fragen-Modus: automatisch Runde beenden, wenn alle lebenden Spieler keine Fragen mehr haben
+    if (currentMode === "questions" && gs.active && !gs.isPaused) {
+        const aliveIds = Object.keys(players).filter(id => (players[id].lives || 0) > 0);
+        if (aliveIds.length > 0) {
+            const someoneHasQuestions = aliveIds.some(id => {
+                const q = players[id].questionsLeft;
+                return typeof q === "number" ? q > 0 : true;
+            });
+            if (!someoneHasQuestions) {
+                stopLogic();
+                update(ref(db, 'gameState'), {
+                    active: false,
+                    isPaused: false
+                });
+            }
+        }
+    }
 
     // Rundenmodus-UI (Modal) syncen
     if (modeTimeRadio && modeQuestionsRadio) {

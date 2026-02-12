@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.76</title>
+    <title>PLAYER | v4.77</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,7 +71,7 @@
         #main-interface.spectator-mode { opacity: 0.75; pointer-events: none; }
         #main-interface.spectator-mode .focus-allow { pointer-events: auto; }
         .player-row-eliminated { opacity: 0.5; filter: grayscale(0.8); }
-        .timer-active { font-size: 8rem !important; color: #f87171; animation: heartbeat 1s infinite; line-height: 1; font-weight: 900; text-shadow: 0 0 40px var(--red-glow); }
+        .player-timer-active { font-size: 8rem !important; color: #f87171; animation: heartbeat 1s infinite; line-height: 1; font-weight: 900; text-shadow: 0 0 40px var(--red-glow); }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
         #timer-container { min-height: 140px; contain: layout style; }
         body { overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
@@ -160,7 +160,7 @@
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.76 · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.77 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
@@ -272,12 +272,19 @@
             const mode = settings.mode || "time";
             const baseRoundClass = "px-6 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest flex justify-center";
             const rt = gs.roundTimer || 0;
+            const currentTimer = gs.playerTimer !== undefined ? gs.playerTimer : 30;
+            const questionsLeft = typeof me.questionsLeft === "number" ? me.questionsLeft : settings.maxQuestions || 0;
+
+            // Haupt-Timer immer anzeigen (30s pro Frage / Zug)
+            const qLabel = mode === "questions"
+                ? `<span class="block text-xs mt-1 text-white/70 tracking-widest">Noch ${questionsLeft} Frage${questionsLeft === 1 ? '' : 'n'}</span>`
+                : "";
+            playerUi.innerHTML = `
+                <span id="player-timer-main">${currentTimer}</span>
+                ${qLabel}
+            `;
 
             if (mode === "questions") {
-                // Fragen-Modus: Timer ausblenden, Fragen anzeigen
-                const questionsLeft = typeof me.questionsLeft === "number" ? me.questionsLeft : settings.maxQuestions || 0;
-                playerUi.innerText = `Noch ${questionsLeft} Frage${questionsLeft === 1 ? '' : 'n'}`;
-
                 if (gs.active && gs.isPaused) {
                     roundUi.innerText = "⏸ FRAGEN-MODUS / PAUSE";
                     roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
@@ -289,8 +296,6 @@
                     roundUi.className = baseRoundClass + " glass text-white border border-white/5";
                 }
             } else {
-                // Zeit-Modus wie bisher
-                playerUi.innerText = gs.playerTimer !== undefined ? gs.playerTimer : 30;
                 if (gs.active && gs.isPaused) {
                     roundUi.innerText = "⏸ PAUSIERT";
                     roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
@@ -304,12 +309,13 @@
             }
 
             // DRAN STATUS (ROT LEUCHTEN)
-            if (me.isDran && gs.active && !gs.isPaused) {
+            const timerSpan = document.getElementById('player-timer-main');
+            if (me.isDran && gs.active && !gs.isPaused && timerSpan) {
                 document.body.classList.add('is-active');
-                playerUi.classList.add('timer-active');
-            } else {
+                timerSpan.classList.add('player-timer-active');
+            } else if (timerSpan) {
                 document.body.classList.remove('is-active');
-                playerUi.classList.remove('timer-active');
+                timerSpan.classList.remove('player-timer-active');
             }
 
             // JOKER LOGIK
