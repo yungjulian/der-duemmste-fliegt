@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ADMIN | v4.78</title>
+    <title>ADMIN | v4.79</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center border-b border-red-900 pb-4 mb-6">
             <div>
                 <h1 class="text-xl font-black text-red-600 uppercase italic">Admin Panel</h1>
-                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.78</p>
+                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.79</p>
             </div>
             <div class="flex items-center gap-6">
                 <div id="admin-round-status" class="text-[9px] font-black uppercase px-3 py-1 rounded-full bg-white/10 text-white/70">—</div>
@@ -59,7 +59,11 @@
                     <div id="admin-vote-chart" class="mt-4 space-y-2 min-h-[80px]"></div>
                     <div id="admin-vote-stats" class="mt-2 space-y-1 text-[10px]"></div>
                 </div>
-                <button id="reset-db" class="w-full text-[9px] uppercase font-black pt-6 text-red-400 hover:text-red-200 border border-red-700/60 rounded-full py-2 bg-red-950/40">Hard Reset</button>
+                <div class="pt-6 flex justify-center">
+                    <button id="reset-db" class="w-full text-center text-[9px] uppercase font-black text-red-400 hover:text-red-200 border border-red-700/60 rounded-full py-2 bg-red-950/40">
+                        Hard Reset
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -97,6 +101,11 @@
                     <input id="max-questions" type="number" min="1" step="1"
                            class="w-full bg-black border border-white/20 rounded-xl px-3 py-2 text-xs" />
                 </div>
+                <div class="col-span-2">
+                    <label class="block mb-1 opacity-60 uppercase">Spielerzeit pro Frage (Sekunden)</label>
+                    <input id="player-time" type="number" min="5" step="5"
+                           class="w-full bg-black border border-white/20 rounded-xl px-3 py-2 text-xs" />
+                </div>
             </div>
 
             <div class="flex justify-end gap-3 text-[10px] uppercase">
@@ -110,6 +119,6 @@
         </div>
     </div>
 
-    <script type="module" src="admin.js?v=4.78"></script>
+    <script type="module" src="admin.js?v=4.79"></script>
 </body>
 </html>

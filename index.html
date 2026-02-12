@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.78</title>
+    <title>PLAYER | v4.79</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -122,7 +122,8 @@
         </div>
         <div id="login-screen" class="glass-strong rounded-3xl p-8 text-center w-full border border-white/[0.08] shadow-2xl shadow-black/40">
             <h2 class="text-[10px] font-black mb-5 uppercase tracking-[0.35em] text-white/50">Beitreten</h2>
-            <input type="text" id="p-name" placeholder="DEIN NAME" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 mb-4 text-center font-bold text-white uppercase outline-none focus:border-red-500/60 focus:ring-2 focus:ring-red-500/20 transition-all placeholder:text-white/30">
+            <input maxlength="16" type="text" id="p-name" placeholder="DEIN NAME" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 mb-1 text-center font-bold text-white uppercase outline-none focus:border-red-500/60 focus:ring-2 focus:ring-red-500/20 transition-all placeholder:text-white/30">
+            <p id="name-counter" class="text-[9px] text-white/50 mb-3 tracking-[0.2em] uppercase">0 / 16</p>
             <button id="join-btn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black uppercase shadow-lg shadow-red-900/30 active:scale-[0.98] transition-all border border-red-500/20">Jetzt Starten</button>
         </div>
     </div>
@@ -160,7 +161,7 @@
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.78 · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.79 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
@@ -180,10 +181,24 @@
         const playerUi = document.getElementById('player-ui');
         const roundUi = document.getElementById('round-ui');
         const activePlayerName = document.getElementById('active-player');
+        const nameInput = document.getElementById('p-name');
+        const nameCounter = document.getElementById('name-counter');
 
         const notify = (text, color = "#2563eb") => { 
             Toastify({ text, duration: 2000, gravity: "top", position: "center", style: { background: color, borderRadius: "50px", fontSize: "11px", fontWeight: "bold" } }).showToast(); 
         };
+
+        // NAMENS-LÄNGE ANZEIGE
+        if (nameInput && nameCounter) {
+            const updateNameCounter = () => {
+                if (nameInput.value.length > 16) {
+                    nameInput.value = nameInput.value.slice(0, 16);
+                }
+                nameCounter.textContent = `${nameInput.value.length} / 16`;
+            };
+            nameInput.addEventListener('input', updateNameCounter);
+            updateNameCounter();
+        }
 
         // BEITRETEN FUNKTION
         joinBtn.onclick = () => {
@@ -344,7 +359,7 @@
                     b.onclick = () => { 
                         update(ref(db, `players/${myId}`), { jokerUsed: true, isDran: false }); 
                         update(ref(db, `players/${id}`), { isDran: true }); 
-                        update(ref(db, 'gameState'), { playerTimer: 30 });
+                        update(ref(db, 'gameState'), { playerTimer: gs.playerTimer || 30 });
                         notify(`Joker auf ${players[id].name}!`);
                     };
                     jokerTargets.appendChild(b);

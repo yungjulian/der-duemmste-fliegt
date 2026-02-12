@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.78";
+const VERSION = "4.79";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -45,6 +45,7 @@ let lastActiveId = null;
 let currentMode = "time";
 let currentTimeLimit = 150;
 let currentMaxQuestions = 5;
+let currentPlayerPerQuestion = 30;
 
 const formatTime = (t) => {
     const m = Math.floor(t / 60); const s = t % 60;
@@ -120,6 +121,7 @@ onValue(ref(db), (snap) => {
     currentMode = settings.mode || "time";
     currentTimeLimit = settings.timeLimitSeconds || 150;
     currentMaxQuestions = settings.maxQuestions || 5;
+    currentPlayerPerQuestion = settings.playerTimeSeconds || 30;
 
     currentRoundTime = gs.roundTimer !== undefined ? gs.roundTimer : currentRoundTime;
     currentPlayerTime = gs.playerTimer !== undefined ? gs.playerTimer : currentPlayerTime;
@@ -157,6 +159,9 @@ onValue(ref(db), (snap) => {
         timeSecondsInput.value = secs;
     }
     if (maxQuestionsInput) maxQuestionsInput.value = currentMaxQuestions;
+    // Spielerzeit pro Frage im Modal
+    const playerTimeInput = document.getElementById('player-time');
+    if (playerTimeInput) playerTimeInput.value = currentPlayerPerQuestion;
 
     if (modeIndicator) {
         modeIndicator.textContent = currentMode === "time"
@@ -374,7 +379,7 @@ window.setDran = (id) => {
         Object.keys(players).forEach(pId => {
             updates[`players/${pId}/isDran`] = (pId === id);
         });
-        updates['gameState/playerTimer'] = 30;
+        updates['gameState/playerTimer'] = currentPlayerPerQuestion;
         update(ref(db), updates);
     }, { onlyOnce: true });
 };
@@ -423,16 +428,20 @@ const applySettingsToDb = () => {
     if (!isNaN(seconds)) timeLimit += seconds;
     if (timeLimit <= 0) timeLimit = currentTimeLimit || 150;
     const maxQ = parseInt(maxQuestionsInput?.value || currentMaxQuestions, 10) || 5;
+    const playerTimeInput = document.getElementById('player-time');
+    const playerTime = parseInt(playerTimeInput?.value || currentPlayerPerQuestion, 10) || 30;
 
     currentMode = mode;
     currentTimeLimit = timeLimit;
     currentMaxQuestions = maxQ;
+    currentPlayerPerQuestion = playerTime;
 
     // Einstellungen speichern
     return update(ref(db, 'settings'), {
         mode,
         timeLimitSeconds: timeLimit,
-        maxQuestions: maxQ
+        maxQuestions: maxQ,
+        playerTimeSeconds: playerTime
     }).then(() => {
         // Beim Wechsel des Modus Runde sauber zurücksetzen,
         // damit alle Clients denselben Zustand haben
@@ -441,7 +450,7 @@ const applySettingsToDb = () => {
             active: false,
             isPaused: false,
             roundTimer: initialRoundTime,
-            playerTimer: 30
+            playerTimer: playerTime
         });
     });
 };
@@ -470,7 +479,7 @@ startRoundBtn.onclick = () => {
         active: true,
         isPaused: false,
         roundTimer: initialRoundTime,
-        playerTimer: 30,
+        playerTimer: currentPlayerPerQuestion,
         votingActive: false,
         votingFinished: false,
         showResults: false,
@@ -509,9 +518,9 @@ resumeRoundBtn.onclick = () => {
 
 stopRoundBtn.onclick = () => {
     stopLogic();
-    update(ref(db, 'gameState'), { active: false, isPaused: false, roundTimer: 150, playerTimer: 30 });
+    update(ref(db, 'gameState'), { active: false, isPaused: false, roundTimer: 150, playerTimer: currentPlayerPerQuestion });
     currentRoundTime = 150;
-    currentPlayerTime = 30;
+    currentPlayerTime = currentPlayerPerQuestion;
 };
 
 // --- RICHTIG / FALSCH & NÄCHSTER SPIELER ---
@@ -677,7 +686,7 @@ resetDbBtn.onclick = () => {
             active: false,
             isPaused: false,
             roundTimer: 150,
-            playerTimer: 30,
+            playerTimer: currentPlayerPerQuestion,
             flashEffect: null,
             votingActive: false,
             votingFinished: false,
