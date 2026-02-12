@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>PLAYER | v4.7.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <style>
+        :root {
+            --glass-bg: rgba(10, 10, 10, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-blur: 24px;
+            --red-glow: rgba(185, 28, 28, 0.4);
+            --red-accent: #dc2626;
+        }
+        * { box-sizing: border-box; }
+        html { min-height: 100vh; min-height: 100dvh; background: #0a0a0a; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            min-height: 100dvh;
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            padding: max(1rem, env(safe-area-inset-top)) env(safe-area-inset-right) calc(60px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: #0a0a0a;
+            background-image:
+                radial-gradient(ellipse 140% 100% at 50% -10%, rgba(38, 38, 38, 0.5), transparent 45%),
+                radial-gradient(ellipse 100% 80% at 80% 40%, rgba(30, 20, 20, 0.4), transparent 40%),
+                radial-gradient(ellipse 90% 70% at 10% 90%, rgba(25, 15, 15, 0.35), transparent 35%);
+        }
+        body.is-active::before {
+            background: #0a0a0a;
+            background-image:
+                radial-gradient(ellipse 140% 100% at 50% -10%, rgba(80, 20, 20, 0.4), transparent 50%),
+                radial-gradient(ellipse 100% 80% at 80% 40%, rgba(50, 15, 15, 0.3), transparent 40%),
+                radial-gradient(ellipse 90% 70% at 10% 90%, rgba(30, 10, 10, 0.25), transparent 35%);
+        }
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.04);
+        }
+        .glass-strong {
+            background: rgba(15, 15, 15, 0.75);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
+        }
+        .hidden { display: none !important; }
+        #main-interface.spectator-mode { opacity: 0.75; pointer-events: none; }
+        #main-interface.spectator-mode .focus-allow { pointer-events: auto; }
+        .player-row-eliminated { opacity: 0.5; filter: grayscale(0.8); }
+        .timer-active { font-size: 8rem !important; color: #f87171; animation: heartbeat 1s infinite; line-height: 1; font-weight: 900; text-shadow: 0 0 40px var(--red-glow); }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        #timer-container { min-height: 140px; contain: layout style; }
+        body { overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+        #vignette-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 5000;
+            opacity: 0;
+            transition: opacity 0.6s ease-out, box-shadow 0.8s ease-out;
+        }
+        #vignette-overlay.correct {
+            opacity: 0.7;
+            box-shadow: inset 0 0 120px 50px rgba(22, 163, 74, 0.6);
+            animation: flashFade 1.2s ease-out;
+        }
+        #vignette-overlay.wrong {
+            opacity: 0.7;
+            box-shadow: inset 0 0 120px 50px rgba(220, 38, 38, 0.6);
+            animation: flashFade 1.2s ease-out;
+        }
+        @keyframes flashFade {
+            0% { opacity: 0; transform: scale(1); }
+            30% { opacity: 0.8; transform: scale(1.02); }
+            100% { opacity: 0; transform: scale(1); }
+        }
+        footer {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px env(safe-area-inset-right) calc(10px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            text-align: center;
+            z-index: 4000;
+        }
+    </style>
+</head>
+<body class="p-4 flex flex-col items-center min-h-screen">
+    <div id="vignette-overlay"></div>
+    <div id="eliminated-overlay" class="hidden fixed inset-0 bg-black z-[6000] flex flex-col items-center justify-center text-center p-6">
+        <p class="text-red-600 text-3xl font-black uppercase italic tracking-tighter mb-6">Eliminiert</p>
+        <button id="spectator-btn" class="px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-white font-black uppercase text-sm hover:bg-white/20 transition-all">Zuschauen</button>
+    </div>
+
+    <div id="landing-wrap" class="w-full max-w-md flex flex-col items-center pt-6 sm:pt-8">
+        <div id="logo" class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-black tracking-tighter uppercase leading-[1.05] text-white" style="font-family: 'Inter', sans-serif; letter-spacing: -0.04em; text-shadow: 0 2px 20px rgba(0,0,0,0.4);">Der Dümmste fliegt</h1>
+        </div>
+        <div id="login-screen" class="glass-strong rounded-3xl p-8 text-center w-full border border-white/[0.08] shadow-2xl shadow-black/40">
+            <h2 class="text-[10px] font-black mb-5 uppercase tracking-[0.35em] text-white/50">Beitreten</h2>
+            <input type="text" id="p-name" placeholder="DEIN NAME" class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 mb-4 text-center font-bold text-white uppercase outline-none focus:border-red-500/60 focus:ring-2 focus:ring-red-500/20 transition-all placeholder:text-white/30">
+            <button id="join-btn" class="w-full bg-red-600 hover:bg-red-500 py-4 rounded-2xl font-black uppercase shadow-lg shadow-red-900/30 active:scale-[0.98] transition-all border border-red-500/20">Jetzt Starten</button>
+        </div>
+    </div>
+
+    <div id="main-interface" class="hidden w-full max-w-md space-y-4">
+        <div id="status-bar" class="w-full text-center py-3 px-4 rounded-2xl text-sm font-black uppercase tracking-widest border transition-colors glass"></div>
+        <div id="focus-zone" class="glass rounded-[2rem] p-8 text-center transition-all border-white/[0.08]">
+            <div id="timer-container" class="min-h-[140px] flex flex-col justify-center">
+                <div id="player-ui" class="text-7xl font-black transition-all">30</div>
+                <p id="time-label" class="text-[10px] uppercase opacity-40 mt-4 tracking-[0.2em]">Sekunden</p>
+            </div>
+            <h2 id="active-player" class="text-2xl font-black uppercase mb-6 tracking-tighter">Bereit machen...</h2>
+            
+            <div id="joker-section">
+                <button id="joker-btn" class="w-full py-5 rounded-2xl font-black uppercase text-sm shadow-lg transition-all"></button>
+                <div id="joker-targets" class="hidden mt-4 grid grid-cols-2 gap-2"></div>
+            </div>
+        </div>
+
+        <div class="flex justify-center">
+            <div id="round-ui" class="glass px-6 py-2 rounded-full text-[10px] font-mono font-bold text-white border-white/[0.08] uppercase tracking-widest">RUNDE: 00:00</div>
+        </div>
+        
+        <div id="voting-zone" class="hidden glass rounded-2xl p-6 border border-blue-500/30 text-center shadow-xl">
+            <h3 id="vote-title" class="text-[10px] font-black uppercase text-blue-400 mb-4 tracking-widest italic">Voting-Phase</h3>
+            <div id="vote-timer-ui" class="text-blue-500 font-mono text-3xl mb-4 font-black italic">60s</div>
+            <div id="vote-btns" class="grid grid-cols-1 gap-3"></div>
+        </div>
+
+        <div id="player-list" class="space-y-2"></div>
+    </div>
+
+    <footer>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.7.0 · by Julian Scherer</p>
+    </footer>
+
+    <script type="module">
+        import { db, ref, onValue, push, set, update } from "./firebase-config.js";
+        
+        let myId = null;
+        let spectatorMode = false;
+        const loginScreen = document.getElementById('login-screen');
+        const mainInterface = document.getElementById('main-interface');
+        const statusBar = document.getElementById('status-bar');
+        const eliminatedOverlay = document.getElementById('eliminated-overlay');
+        const spectatorBtn = document.getElementById('spectator-btn');
+        const joinBtn = document.getElementById('join-btn');
+        const jokerBtn = document.getElementById('joker-btn');
+        const jokerTargets = document.getElementById('joker-targets');
+        const vignette = document.getElementById('vignette-overlay');
+        const playerUi = document.getElementById('player-ui');
+        const roundUi = document.getElementById('round-ui');
+        const activePlayerName = document.getElementById('active-player');
+
+        const notify = (text, color = "#2563eb") => { 
+            Toastify({ text, duration: 2000, gravity: "top", position: "center", style: { background: color, borderRadius: "50px", fontSize: "11px", fontWeight: "bold" } }).showToast(); 
+        };
+
+        // BEITRETEN FUNKTION
+        joinBtn.onclick = () => {
+            const n = document.getElementById('p-name').value.trim();
+            if(!n) return;
+            const r = push(ref(db, 'players'));
+            myId = r.key;
+            set(r, { name: n.toUpperCase(), lives: 3, isDran: false, jokerUsed: false }).then(() => {
+                loginScreen.classList.add('hidden');
+                mainInterface.classList.remove('hidden');
+                const landingWrap = document.getElementById('landing-wrap');
+                if (landingWrap) landingWrap.classList.add('hidden');
+                notify("Erfolgreich beigetreten!", "#16a34a");
+            });
+        };
+
+        // JOKER TOGGLE
+        jokerBtn.onclick = () => {
+            jokerTargets.classList.toggle('hidden');
+        };
+
+        spectatorBtn.onclick = () => {
+            spectatorMode = true;
+            eliminatedOverlay.classList.add('hidden');
+            mainInterface.classList.add('spectator-mode');
+        };
+
+        // DATABASE SYNC
+        onValue(ref(db), (snap) => {
+            const data = snap.val();
+            
+            // RESET LOGIK (RAUSWURF)
+            if (!data || !data.players || (myId && !data.players[myId])) {
+                if(myId) { 
+                    myId = null; 
+                    window.location.reload(); 
+                } 
+                return; 
+            }
+
+            const players = data.players;
+            const gs = data.gameState || {};
+            const me = players[myId];
+
+            // ELIMINIERT CHECK + ZUSCHAUEN
+            if (me.lives <= 0) {
+                if (!spectatorMode) eliminatedOverlay.classList.remove('hidden');
+                else { eliminatedOverlay.classList.add('hidden'); mainInterface.classList.add('spectator-mode'); }
+            } else {
+                eliminatedOverlay.classList.add('hidden');
+                mainInterface.classList.remove('spectator-mode');
+            }
+
+            // FEEDBACK FLASH
+            if (gs.flashEffect) vignette.className = gs.flashEffect;
+            else vignette.className = '';
+
+            // STATUS-LEISTE (Pause/Ende deutlich sichtbar)
+            let statusText = "Bereit";
+            let statusClass = "glass border-white/10 text-white/80";
+            if (gs.showResults) {
+                statusText = gs.votingTie ? "STECHEN – Neuwählen" : "Ergebnisse";
+                statusClass = "bg-white/10 border-blue-500/50 text-white";
+            } else if (gs.votingFinished) {
+                statusText = "Voting beendet";
+                statusClass = "bg-white/10 border-blue-500/30 text-white";
+            } else if (gs.votingActive) {
+                statusText = "Voting – abstimmen";
+                statusClass = "bg-blue-950/40 border-blue-500 text-blue-200";
+            } else if (gs.active && gs.isPaused) {
+                statusText = "⏸ Runde pausiert";
+                statusClass = "bg-amber-950/60 border-amber-500 text-amber-200";
+            } else if (gs.active) {
+                statusText = "▶ Runde läuft";
+                statusClass = "bg-red-950/40 border-red-500/50 text-red-200";
+            } else {
+                statusText = "■ Runde beendet / Nicht gestartet";
+                statusClass = "bg-white/5 border-white/20 text-white/60";
+            }
+            statusBar.textContent = statusText;
+            statusBar.className = "w-full text-center py-3 px-4 rounded-xl text-sm font-black uppercase tracking-widest border-2 transition-colors " + statusClass;
+
+            // TIMER SYNC (bei Pause/Ende deutliche Anzeige)
+            playerUi.innerText = gs.playerTimer !== undefined ? gs.playerTimer : 30;
+            const rt = gs.roundTimer || 0;
+            const baseRoundClass = "px-6 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest flex justify-center";
+            if (gs.active && gs.isPaused) {
+                roundUi.innerText = "⏸ PAUSIERT";
+                roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
+            } else if (!gs.active) {
+                roundUi.innerText = "— Runde beendet —";
+                roundUi.className = baseRoundClass + " glass border border-white/20 text-white/50";
+            } else {
+                roundUi.innerText = `RUNDE: ${Math.floor(rt/60)}:${(rt%60).toString().padStart(2,'0')}`;
+                roundUi.className = baseRoundClass + " glass text-white border border-white/5";
+            }
+
+            // DRAN STATUS (ROT LEUCHTEN)
+            if (me.isDran && gs.active && !gs.isPaused) {
+                document.body.classList.add('is-active');
+                playerUi.classList.add('timer-active');
+            } else {
+                document.body.classList.remove('is-active');
+                playerUi.classList.remove('timer-active');
+            }
+
+            // JOKER LOGIK
+            const canUseJoker = gs.active && !gs.isPaused && !gs.votingActive && !gs.showResults;
+            if (canUseJoker && me.isDran) {
+                if(me.jokerUsed) {
+                    jokerBtn.innerText = "Joker Weg";
+                    jokerBtn.className = "w-full py-4 rounded-xl opacity-20 bg-white/5 pointer-events-none uppercase text-xs font-bold";
+                } else {
+                    jokerBtn.innerText = "JOKER NUTZEN!";
+                    jokerBtn.className = "w-full py-5 rounded-2xl bg-yellow-600 text-black font-black animate-bounce shadow-xl uppercase transition-all";
+                }
+            } else {
+                jokerBtn.innerText = "WARTEN...";
+                jokerBtn.className = "w-full py-4 rounded-xl opacity-10 bg-white/5 pointer-events-none uppercase text-xs font-bold";
+                jokerTargets.classList.add('hidden');
+            }
+
+            // JOKER TARGETS RENDERN
+            jokerTargets.innerHTML = "";
+            for(let id in players) {
+                if(id !== myId && players[id].lives > 0) {
+                    const b = document.createElement('button');
+                    b.className = "bg-yellow-600/20 py-3 rounded-xl text-[10px] font-black border border-yellow-600/40 text-white active:bg-yellow-600";
+                    b.innerText = players[id].name;
+                    b.onclick = () => { 
+                        update(ref(db, `players/${myId}`), { jokerUsed: true, isDran: false }); 
+                        update(ref(db, `players/${id}`), { isDran: true }); 
+                        update(ref(db, 'gameState'), { playerTimer: 30 });
+                        notify(`Joker auf ${players[id].name}!`);
+                    };
+                    jokerTargets.appendChild(b);
+                }
+            }
+
+            // VOTING RENDERN
+            const vz = document.getElementById('voting-zone');
+            const vBtns = document.getElementById('vote-btns');
+            if(gs.votingActive || gs.votingFinished) {
+                vz.classList.remove('hidden');
+                document.getElementById('vote-timer-ui').innerText = gs.votingActive ? (gs.voteTimer + "s") : "ENDE";
+                vBtns.innerHTML = "";
+                for(let id in players) {
+                    if(id !== myId && players[id].lives > 0) {
+                        const b = document.createElement('button');
+                        const hasVoted = data.votes && data.votes[myId] === id;
+                        b.className = `py-3 rounded-xl text-xs font-black uppercase transition-all ${hasVoted ? 'bg-blue-600 text-white shadow-lg' : 'bg-white/5 border border-white/10'}`;
+                        if(gs.votingFinished) b.style.opacity = "0.5";
+                        b.innerText = players[id].name;
+                        if(gs.votingActive) b.onclick = () => { set(ref(db, `votes/${myId}`), id); notify("Stimme registriert!"); };
+                        vBtns.appendChild(b);
+                    }
+                }
+            } else if(gs.showResults) {
+                vz.classList.remove('hidden');
+                document.getElementById('vote-title').innerText = gs.votingTie ? "STECHEN – Neuwählen" : "ERGEBNISSE";
+                document.getElementById('vote-timer-ui').innerText = gs.votingTie ? "Nochmal abstimmen" : "FINALE";
+                vBtns.innerHTML = "";
+                const total = data.votes ? Object.keys(data.votes).length : 0;
+                for(let id in players) {
+                    if (players[id].lives > 0) {
+                        const count = Object.values(data.votes || {}).filter(v => v === id).length;
+                        const p = total > 0 ? Math.round((count/total)*100) : 0;
+                        vBtns.innerHTML += `<div class="text-left mb-3"><div class="flex justify-between text-[10px] mb-1 font-bold uppercase tracking-widest"><span>${players[id].name}</span><span class="text-blue-400">${p}%</span></div><div class="w-full bg-white/5 h-2 rounded-full overflow-hidden border border-white/5"><div class="bg-blue-600 h-full transition-all duration-1000" style="width: ${p}%"></div></div></div>`;
+                    }
+                }
+            } else {
+                vz.classList.add('hidden');
+            }
+
+            // PLAYER LIST RENDERN (Reihenfolge wie Admin, Tote ausgegraut)
+            const pl = document.getElementById('player-list');
+            pl.innerHTML = "";
+            const playerOrder = (gs.playerOrder && Array.isArray(gs.playerOrder)) ? gs.playerOrder : Object.keys(players);
+            const orderedIds = [...playerOrder].filter(id => players[id]);
+            for(const id of orderedIds) {
+                const p = players[id];
+                if(p.isDran) activePlayerName.innerText = p.name;
+                const isDead = p.lives <= 0;
+                const d = document.createElement('div');
+                d.className = `flex justify-between items-center p-4 rounded-xl border transition-all ${p.isDran ? 'border-red-600 bg-red-950/20' : 'bg-white/5 border-white/5'} ${isDead ? 'player-row-eliminated' : ''}`;
+                const hearts = p.lives > 0 ? "❤️".repeat(p.lives) : "☠️";
+                const jokerStar = p.jokerUsed ? "☆" : "⭐";
+                d.innerHTML = `
+                    <div class="flex flex-col">
+                        <span class="text-sm font-bold text-white">${p.name}</span>
+                    </div>
+                    <span class="text-red-600 text-[10px] font-bold tracking-widest flex items-center gap-1">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
+                `;
+                pl.appendChild(d);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN | v4.7.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+<body class="bg-[#050000] text-white p-4 font-sans overflow-x-hidden">
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-between items-center border-b border-red-900 pb-4 mb-6">
+            <div>
+                <h1 class="text-xl font-black text-red-600 uppercase italic">Master Control</h1>
+                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.7.0</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div id="admin-round-status" class="text-[9px] font-black uppercase px-3 py-1 rounded-full bg-white/10 text-white/70">—</div>
+                <div class="text-center"><p class="text-[8px] opacity-40 uppercase">Runde</p><div id="round-timer" class="text-2xl font-mono font-black text-white">02:30</div></div>
+                <div class="text-center"><p class="text-[8px] text-red-500 uppercase">Spieler</p><div id="player-timer" class="text-2xl font-mono font-black text-red-600 bg-red-900/20 px-4 rounded-lg">30</div></div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="lg:col-span-2 bg-white/5 p-6 rounded-3xl border border-white/10">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-bold opacity-50 uppercase italic">Teilnehmer</h2>
+                    <button id="next-player-btn" class="bg-white/10 text-white px-4 py-2 rounded-full font-black text-[9px] uppercase hover:bg-white hover:text-black">Überspringen ➔</button>
+                </div>
+                <div id="admin-player-list" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="window.answerAndNext(true)" class="bg-green-600 hover:bg-green-500 py-8 rounded-2xl font-black text-xs uppercase shadow-lg shadow-green-900/20 active:scale-95 transition-all">✓ RICHTIG<br><span class="opacity-50 text-[8px] lowercase">und weiter</span></button>
+                    <button onclick="window.answerAndNext(false)" class="bg-red-600 hover:bg-red-500 py-8 rounded-2xl font-black text-xs uppercase shadow-lg shadow-red-900/20 active:scale-95 transition-all">✕ FALSCH<br><span class="opacity-50 text-[8px] lowercase">und weiter</span></button>
+                </div>
+
+                <div class="bg-white/5 p-6 rounded-3xl border border-red-600/30">
+                    <button id="start-round-btn" class="w-full bg-red-600 py-4 rounded-xl font-black text-lg mb-2">RUNDE STARTEN</button>
+                    <button id="pause-round-btn" class="w-full bg-amber-600 py-2 rounded-xl font-black text-[10px] uppercase mb-2 hidden">Runde pausieren</button>
+                    <button id="resume-round-btn" class="w-full bg-green-600 py-2 rounded-xl font-black text-[10px] uppercase mb-2 hidden">Fortsetzen</button>
+                    <button id="stop-round-btn" class="w-full bg-white/10 py-2 rounded-xl text-[10px] uppercase font-black border border-white/20 hidden">Runde stoppen</button>
+                </div>
+
+                <div class="bg-white/5 p-6 rounded-3xl border border-blue-600/30">
+                    <button id="start-vote-btn" class="w-full bg-blue-600 py-3 rounded-xl font-black uppercase text-[10px] mb-2">1. Voting öffnen</button>
+                    <button id="end-vote-btn" class="w-full bg-amber-600 py-2 rounded-xl font-black uppercase text-[10px] mb-2 hidden">Voting jetzt beenden</button>
+                    <button id="reveal-vote-btn" class="w-full bg-green-600 py-3 rounded-xl font-black uppercase text-[10px] mb-2 hidden">2. Ergebnisse zeigen</button>
+                    <button id="hide-vote-btn" class="w-full bg-white/10 py-2 rounded-xl font-black uppercase text-[10px] hidden">3. Voting ausblenden</button>
+                    <div id="admin-vote-chart" class="mt-4 space-y-2 min-h-[80px]"></div>
+                    <div id="admin-vote-stats" class="mt-2 space-y-1 text-[10px]"></div>
+                </div>
+                <button id="reset-db" class="w-full text-[9px] text-white/10 uppercase font-black hover:text-red-500 pt-6">Hard Reset</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="admin.js?v=4.7.0"></script>
+</body>
+</html>

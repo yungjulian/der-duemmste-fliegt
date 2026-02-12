@@ -1,0 +1,3 @@
+.heart-empty { color: #555; /* Or use a different SVG/icon for an empty heart */ }
+.player-name-container { display: flex; align-items: center; overflow: hidden; white-space: nowrap; }
+.player-name { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: clamp(0.8rem, 3vw, 1.2rem); }
