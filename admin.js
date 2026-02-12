@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.87";
+const VERSION = "4.88";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');

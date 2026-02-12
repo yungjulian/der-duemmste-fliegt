@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.87</title>
+    <title>PLAYER | v4.88</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,28 +81,22 @@
             pointer-events: none;
             z-index: 5000;
             opacity: 0;
-            transition: opacity 0.4s ease-out, box-shadow 0.4s ease-out;
+            transition: opacity 0.3s ease-in-out;
         }
-        /* Dezenter Rand-Glow statt starkem Fullscreen-Flash */
+        /* Farbige Vignette mit sanftem Ein- und Ausblenden */
         #vignette-overlay.correct {
-            opacity: 0.7;
-            background: transparent;
-            box-shadow:
-                inset 0 0 0 3px rgba(34, 197, 94, 0.9),
-                0 0 32px rgba(34, 197, 94, 0.35);
-            animation: flashFade 0.8s ease-out;
+            background: rgba(34, 197, 94, 0.4);
+            animation: vignetteFade 1s ease-in-out;
         }
         #vignette-overlay.wrong {
-            opacity: 0.7;
-            background: transparent;
-            box-shadow:
-                inset 0 0 0 3px rgba(248, 113, 113, 0.95),
-                0 0 32px rgba(248, 113, 113, 0.4);
-            animation: flashFade 0.8s ease-out;
+            background: rgba(220, 38, 38, 0.4);
+            animation: vignetteFade 1s ease-in-out;
         }
-        @keyframes flashFade {
+        @keyframes vignetteFade {
             0% { opacity: 0; }
-            35% { opacity: 1; }
+            20% { opacity: 0.6; }
+            50% { opacity: 0.5; }
+            80% { opacity: 0.6; }
             100% { opacity: 0; }
         }
         footer {
@@ -176,7 +170,7 @@
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.87 · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.88 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
