@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.7.2</title>
+    <title>PLAYER | v4.7.3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -153,10 +153,14 @@
         </div>
 
         <div id="player-list" class="space-y-2"></div>
+        <div id="elim-section" class="space-y-2 mt-4 hidden">
+            <p class="text-[9px] font-black uppercase tracking-[0.25em] text-white/40">Eliminiert</p>
+            <div id="player-list-elim" class="space-y-2"></div>
+        </div>
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.7.2 · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.7.3 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
@@ -183,8 +187,9 @@
 
         // BEITRETEN FUNKTION
         joinBtn.onclick = () => {
-            const n = document.getElementById('p-name').value.trim();
-            if(!n) return;
+            const raw = document.getElementById('p-name').value.trim();
+            if(!raw) return;
+            const n = raw.slice(0, 16); // Namen hart auf 16 Zeichen begrenzen
             const r = push(ref(db, 'players'));
             myId = r.key;
             set(r, { name: n.toUpperCase(), lives: 3, isDran: false, jokerUsed: false }).then(() => {
@@ -354,26 +359,52 @@
                 vz.classList.add('hidden');
             }
 
-            // PLAYER LIST RENDERN (Reihenfolge wie Admin, Tote ausgegraut)
+            // PLAYER LIST RENDERN (Reihenfolge wie Admin, Tote separat unter „Eliminiert“, Namen max. 16 Zeichen)
             const pl = document.getElementById('player-list');
+            const plElim = document.getElementById('player-list-elim');
+            const elimSection = document.getElementById('elim-section');
             pl.innerHTML = "";
+            if (plElim) plElim.innerHTML = "";
+
             const playerOrder = (gs.playerOrder && Array.isArray(gs.playerOrder)) ? gs.playerOrder : Object.keys(players);
             const orderedIds = [...playerOrder].filter(id => players[id]);
-            for(const id of orderedIds) {
+
+            const aliveIds = orderedIds.filter(id => players[id].lives > 0);
+            const deadIds = orderedIds.filter(id => players[id].lives <= 0);
+
+            const renderRow = (id, target, isDead) => {
                 const p = players[id];
-                if(p.isDran) activePlayerName.innerText = p.name;
-                const isDead = p.lives <= 0;
+                const displayName = (p.name || '').slice(0, 16);
+                if (p.isDran && !isDead) activePlayerName.innerText = displayName;
+
                 const d = document.createElement('div');
                 d.className = `flex justify-between items-center p-4 rounded-xl border transition-all ${p.isDran ? 'border-red-600 bg-red-950/20' : 'bg-white/5 border-white/5'} ${isDead ? 'player-row-eliminated' : ''}`;
-                const hearts = p.lives > 0 ? "❤️".repeat(p.lives) : "☠️";
+
+                const maxLives = 3;
+                const rawLives = typeof p.lives === 'number' ? p.lives : 0;
+                const clampedLives = Math.max(0, Math.min(rawLives, maxLives));
+                const fullHearts = "❤️".repeat(clampedLives);
+                const emptyHearts = "♡".repeat(maxLives - clampedLives);
+                const hearts = rawLives > 0 ? fullHearts + emptyHearts : "☠️";
                 const jokerStar = p.jokerUsed ? "☆" : "⭐";
+
+                const nameSize = displayName.length > 10 ? 'text-xs' : 'text-sm';
+
                 d.innerHTML = `
                     <div class="flex flex-col">
-                        <span class="text-sm font-bold text-white">${p.name}</span>
+                        <span class="${nameSize} font-bold text-white">${displayName}</span>
                     </div>
-                    <span class="text-red-600 text-[10px] font-bold tracking-widest flex items-center gap-1">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
+                    <span class="text-red-600 text-[10px] font-bold tracking-widest flex items-center gap-1 whitespace-nowrap">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
                 `;
-                pl.appendChild(d);
+                target.appendChild(d);
+            };
+
+            aliveIds.forEach(id => renderRow(id, pl, false));
+            if (plElim) {
+                deadIds.forEach(id => renderRow(id, plElim, true));
+                if (elimSection) {
+                    elimSection.classList.toggle('hidden', deadIds.length === 0);
+                }
             }
         });
     </script>

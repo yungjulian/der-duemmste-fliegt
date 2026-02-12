@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.7.2";
+const VERSION = "4.7.3";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -201,13 +201,9 @@ onValue(ref(db), (snap) => {
         // Name verkleinern, wenn lang, damit Herzen+Stern in einer Zeile bleiben
         const nameSizeClass = p.name && p.name.length > 10 ? 'text-xs' : 'text-sm';
 
-        // Leben als volle + leere Herzen (max 3 Slots)
-        const maxLives = 3;
+        // Admin-Ansicht: nur volle Herzen anzeigen (keine leeren Slots)
         const rawLives = typeof p.lives === 'number' ? p.lives : 0;
-        const clampedLives = Math.max(0, Math.min(rawLives, maxLives));
-        const fullHearts = "❤️".repeat(clampedLives);
-        const emptyHearts = "♡".repeat(maxLives - clampedLives);
-        const hearts = rawLives > 0 ? fullHearts + emptyHearts : "☠️";
+        const hearts = rawLives > 0 ? "❤️".repeat(rawLives) : "☠️";
 
         const jokerStar = p.jokerUsed ? "☆" : "⭐";
 

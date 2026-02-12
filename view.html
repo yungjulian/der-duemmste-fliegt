@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ZUSCHAUER | v4.7.2</title>
+    <title>ZUSCHAUER | v4.7.3</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style> 
         body { background: #050000; color: white; font-family: 'Inter', sans-serif; overflow: hidden; } 
@@ -27,7 +27,7 @@
     </div>
 
     <footer>
-        <p class="text-[10px] tracking-[0.5em] font-black text-white/20 uppercase italic">Main Production View — Version 4.7.2</p>
+        <p class="text-[10px] tracking-[0.5em] font-black text-white/20 uppercase italic">Main Production View — Version 4.7.3</p>
     </footer>
 
     <script type="module">
@@ -43,13 +43,15 @@
             else { vInfo.classList.add('hidden'); stat.innerText = gs.active ? "LIVE" : "LOBBY"; stat.className = `absolute top-6 right-8 px-4 py-1 rounded-full text-[10px] font-black ${gs.active ? 'bg-red-600' : 'bg-gray-600'}`; }
             const list = document.getElementById('player-list-container'); list.innerHTML = "";
             for(let id in players) {
-                const p = players[id]; if(p.isDran) document.getElementById('active-player-name').innerText = p.name;
+                const p = players[id];
+                const displayName = (p.name || '').slice(0, 16);
+                if(p.isDran) document.getElementById('active-player-name').innerText = displayName;
                 const d = document.createElement('div'); d.className = `bg-white/5 rounded-3xl p-6 flex justify-between items-center border border-white/5 transition-all ${p.isDran ? 'active-card' : 'opacity-40'}`;
                 let res = ""; if(gs.showResults) { 
                     const total = Object.keys(data.votes || {}).length; const count = Object.values(data.votes || {}).filter(v => v === id).length; const perc = total > 0 ? Math.round((count/total)*100) : 0; 
                     res = `<div class="flex-1 mx-12"><div class="w-full bg-white/5 h-4 rounded-full overflow-hidden border border-white/5"><div class="bg-blue-500 h-full" style="width: ${perc}%"></div></div><p class="text-blue-400 font-bold text-xl mt-1">${perc}%</p></div>`; 
                 }
-                d.innerHTML = `<div class="flex items-center gap-6 flex-1 text-white"><span class="text-4xl font-black uppercase italic tracking-tighter">${p.name}</span>${p.jokerUsed ? '' : '<span class="text-yellow-500 text-3xl">⭐</span>'}</div>${res}<div class="text-4xl ml-8">${p.lives > 0 ? "❤️".repeat(p.lives) : "☠️"}</div>`;
+                d.innerHTML = `<div class="flex items-center gap-6 flex-1 text-white"><span class="text-4xl font-black uppercase italic tracking-tighter">${displayName}</span>${p.jokerUsed ? '' : '<span class="text-yellow-500 text-3xl">⭐</span>'}</div>${res}<div class="text-4xl ml-8">${p.lives > 0 ? "❤️".repeat(p.lives) : "☠️"}</div>`;
                 list.appendChild(d);
             }
         });
