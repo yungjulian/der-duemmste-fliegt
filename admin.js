@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.82";
+const VERSION = "4.86";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -47,6 +47,8 @@ const diffLightInput = document.getElementById('diff-light');
 const diffMediumInput = document.getElementById('diff-medium');
 const diffHardInput = document.getElementById('diff-hard');
 const questionCategoryFiltersEl = document.getElementById('question-category-filters');
+const questionCategoryPanel = document.getElementById('question-category-panel');
+const toggleCategoryFiltersBtn = document.getElementById('toggle-category-filters');
 
 let roundInterval = null, playerInterval = null, voteInterval = null;
 let currentRoundTime = 150, currentPlayerTime = 30, currentVoteTime = 60;
@@ -77,6 +79,19 @@ const shuffleArray = (arr) => {
 
 function rebuildQuestionDeck() {
     if (!allQuestions || !allQuestions.length) return;
+    
+    // Bereits verwendete Fragen speichern (wenn bereits Fragen gezeigt wurden)
+    const usedQuestions = [];
+    const usedQuestionIds = new Set();
+    if (currentQuestionIndex >= 0 && questionDeck && questionDeck.length > 0) {
+        // Alle bereits verwendeten Fragen sammeln (bis zum aktuellen Index)
+        for (let i = 0; i <= currentQuestionIndex && i < questionDeck.length; i++) {
+            usedQuestions.push(questionDeck[i]);
+            usedQuestionIds.add(questionDeck[i].id);
+        }
+    }
+    
+    // Neue Fragen basierend auf aktualisierten Filtern finden
     const filtered = allQuestions.filter(q => {
         const diff = q.schwierigkeit || q.schwierigkeit === "" ? q.schwierigkeit : "Leicht";
         const cat = q.kategorie || "Allgemein";
@@ -84,9 +99,24 @@ function rebuildQuestionDeck() {
         const catOk = !activeCategories || activeCategories[cat] !== false;
         return diffOk && catOk;
     });
-    questionDeck = shuffleArray(filtered);
-    currentQuestionIndex = -1;
-    showNextQuestion();
+    
+    // Wenn bereits Fragen verwendet wurden, neue Fragen hinzufügen (ohne Duplikate)
+    if (usedQuestions.length > 0) {
+        // Neue Fragen, die noch nicht verwendet wurden
+        const newQuestions = filtered.filter(q => !usedQuestionIds.has(q.id));
+        // Deck neu zusammenstellen: bereits verwendete + neue Fragen
+        questionDeck = [...usedQuestions, ...shuffleArray(newQuestions)];
+        // currentQuestionIndex bleibt erhalten (Fortschritt wird nicht zurückgesetzt)
+    } else {
+        // Keine Fragen verwendet, Deck komplett neu aufbauen
+        questionDeck = shuffleArray(filtered);
+        currentQuestionIndex = -1;
+    }
+    
+    // Nur wenn keine Fragen verwendet wurden, nächste Frage anzeigen
+    if (currentQuestionIndex < 0) {
+        showNextQuestion();
+    }
 }
 
 function showNextQuestion() {
@@ -221,6 +251,13 @@ const updateDifficultyFilter = () => {
 if (diffLightInput) diffLightInput.onchange = updateDifficultyFilter;
 if (diffMediumInput) diffMediumInput.onchange = updateDifficultyFilter;
 if (diffHardInput) diffHardInput.onchange = updateDifficultyFilter;
+
+// Kategorien-Panel Toggle
+if (toggleCategoryFiltersBtn && questionCategoryPanel) {
+    toggleCategoryFiltersBtn.onclick = () => {
+        questionCategoryPanel.classList.toggle('hidden');
+    };
+}
 
 function stopLogic() {
     clearInterval(roundInterval);
@@ -421,11 +458,15 @@ onValue(ref(db), (snap) => {
 
         const jokerStar = p.jokerUsed ? "☆" : "⭐";
 
+        const correct = typeof p.roundCorrect === "number" ? p.roundCorrect : 0;
+        const wrong = typeof p.roundWrong === "number" ? p.roundWrong : 0;
+
         card.innerHTML = `
             <div class="flex justify-between items-center mb-3">
-                <div class="flex flex-col">
+                <div class="flex flex-col gap-0.5">
                     <span class="font-black uppercase text-white ${nameSizeClass}">${p.name}</span>
                     ${qLeft !== null ? `<span class="text-[9px] text-white/50 uppercase tracking-widest">Fragen: ${qLeft}</span>` : ''}
+                    <span class="text-[9px] text-white/40 uppercase tracking-widest">Richtig: ${correct} · Falsch: ${wrong}</span>
                 </div>
                 <span class="text-red-500 font-bold flex items-center gap-0.5 whitespace-nowrap">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
             </div>
@@ -510,12 +551,17 @@ onValue(ref(db), (snap) => {
 // --- HELPER FUNCTIONS ---
 window.setDran = (id) => {
     onValue(ref(db, 'players'), (snap) => {
-        const players = snap.val();
+        const players = snap.val() || {};
         const updates = {};
         Object.keys(players).forEach(pId => {
             updates[`players/${pId}/isDran`] = (pId === id);
         });
         updates['gameState/playerTimer'] = currentPlayerPerQuestion;
+        // Rundencounter beim Setzen des ersten Spielers (neue Runde) zurücksetzen
+        Object.keys(players).forEach(pId => {
+            updates[`players/${pId}/roundCorrect`] = 0;
+            updates[`players/${pId}/roundWrong`] = 0;
+        });
         update(ref(db), updates);
     }, { onlyOnce: true });
 };
@@ -661,7 +707,7 @@ stopRoundBtn.onclick = () => {
 };
 
 // --- RICHTIG / FALSCH & NÄCHSTER SPIELER ---
-function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
+function goToNextPlayer({ penalizeCurrent = false, flash = null, isCorrect = null } = {}) {
     onValue(ref(db), (snap) => {
         const data = snap.val() || {};
         const players = data.players || {};
@@ -692,6 +738,18 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
             updates[`players/${currentId}/questionsLeft`] = nextQ;
             if (nextQ === 0) {
                 updates[`players/${currentId}/chatDisabled`] = true;
+            }
+        }
+
+        // Rundencounter (richtig/falsch) aktualisieren
+        if (currentId && players[currentId]) {
+            const cur = players[currentId];
+            const baseCorrect = typeof cur.roundCorrect === "number" ? cur.roundCorrect : 0;
+            const baseWrong = typeof cur.roundWrong === "number" ? cur.roundWrong : 0;
+            if (isCorrect === true) {
+                updates[`players/${currentId}/roundCorrect`] = baseCorrect + 1;
+            } else if (isCorrect === false) {
+                updates[`players/${currentId}/roundWrong`] = baseWrong + 1;
             }
         }
 
@@ -733,7 +791,7 @@ function goToNextPlayer({ penalizeCurrent = false, flash = null } = {}) {
 
 window.answerAndNext = (isCorrect) => {
     // Bei Falsch wird KEIN Herz abgezogen – nur im Voting verliert man ein Leben
-    goToNextPlayer({ penalizeCurrent: false, flash: isCorrect ? 'correct' : 'wrong' });
+    goToNextPlayer({ penalizeCurrent: false, flash: isCorrect ? 'correct' : 'wrong', isCorrect });
 };
 
 window.skipPlayer = () => {

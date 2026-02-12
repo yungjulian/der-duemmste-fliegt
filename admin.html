@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>ADMIN | v4.82</title>
+    <title>ADMIN | v4.86</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center border-b border-red-900 pb-4 mb-6">
             <div>
                 <h1 class="text-xl font-black text-red-600 uppercase italic">Admin Panel</h1>
-                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.82</p>
+                <p id="admin-header-version" class="text-[9px] text-white/40 uppercase tracking-widest mt-0.5">Version 4.86</p>
             </div>
             <div class="flex items-center gap-6">
                 <div id="admin-round-status" class="text-[9px] font-black uppercase px-3 py-1 rounded-full bg-white/10 text-white/70">—</div>
@@ -56,8 +56,8 @@
                         </button>
                     </div>
 
-                    <!-- Schwierigkeits-Filter -->
-                    <div class="mt-3 pt-2 border-t border-white/10">
+                    <!-- Schwierigkeits- & Kategorie-Filter -->
+                    <div class="mt-3 pt-2 border-t border-white/10 relative">
                         <p class="text-[9px] uppercase text-white/40 tracking-[0.25em] mb-1">Schwierigkeit</p>
                         <div class="flex flex-wrap gap-3 text-[10px] text-white/60 mb-2">
                             <label class="inline-flex items-center gap-1 cursor-pointer">
@@ -74,9 +74,17 @@
                             </label>
                         </div>
 
-                        <p class="text-[9px] uppercase text-white/40 tracking-[0.25em] mb-1 mt-2">Kategorien</p>
-                        <div id="question-category-filters" class="flex flex-wrap gap-2 text-[9px] text-white/60 max-h-24 overflow-y-auto pr-1">
-                            <!-- wird per JS dynamisch befüllt -->
+                        <div class="mt-1 flex justify-end">
+                            <button id="toggle-category-filters" class="px-3 py-1 rounded-full text-[9px] uppercase tracking-[0.2em] bg-white/10 hover:bg-white/20 text-white/70 border border-white/15">
+                                Kategorien filtern
+                            </button>
+                        </div>
+
+                        <div id="question-category-panel" class="hidden absolute right-0 mt-2 w-56 bg-[#050000]/95 border border-white/15 rounded-2xl p-3 shadow-2xl z-[6500]">
+                            <p class="text-[9px] uppercase text-white/40 tracking-[0.25em] mb-2">Kategorien</p>
+                            <div id="question-category-filters" class="flex flex-col gap-1 text-[9px] text-white/70 max-h-40 overflow-y-auto pr-1">
+                                <!-- wird per JS dynamisch befüllt -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -169,6 +177,6 @@
         </div>
     </div>
 
-    <script type="module" src="admin.js?v=4.82"></script>
+    <script type="module" src="admin.js?v=4.86"></script>
 </body>
 </html>
