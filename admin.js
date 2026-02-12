@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.77";
+const VERSION = "4.78";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -12,11 +12,13 @@ const adminHeaderVersion = document.getElementById('admin-header-version');
 if (adminHeaderVersion) adminHeaderVersion.textContent = `Version ${VERSION}`;
 
 const adminRoundStatus = document.getElementById('admin-round-status');
+const modeIndicator = document.getElementById('mode-indicator');
 const openModeBtn = document.getElementById('open-mode-modal');
 const modeModal = document.getElementById('mode-modal');
 const modeTimeRadio = document.getElementById('mode-time');
 const modeQuestionsRadio = document.getElementById('mode-questions');
-const timeLimitInput = document.getElementById('time-limit');
+const timeMinutesInput = document.getElementById('time-minutes');
+const timeSecondsInput = document.getElementById('time-seconds');
 const maxQuestionsInput = document.getElementById('max-questions');
 const modeCancelBtn = document.getElementById('mode-cancel');
 const modeSaveBtn = document.getElementById('mode-save');
@@ -148,8 +150,19 @@ onValue(ref(db), (snap) => {
         modeTimeRadio.checked = currentMode === "time";
         modeQuestionsRadio.checked = currentMode === "questions";
     }
-    if (timeLimitInput) timeLimitInput.value = currentTimeLimit;
+    if (timeMinutesInput && timeSecondsInput) {
+        const mins = Math.floor(currentTimeLimit / 60);
+        const secs = currentTimeLimit % 60;
+        timeMinutesInput.value = mins;
+        timeSecondsInput.value = secs;
+    }
     if (maxQuestionsInput) maxQuestionsInput.value = currentMaxQuestions;
+
+    if (modeIndicator) {
+        modeIndicator.textContent = currentMode === "time"
+            ? `Modus: Zeit (${formatTime(currentTimeLimit)})`
+            : `Modus: Fragen (${currentMaxQuestions} pro Spieler)`;
+    }
 
     // Admin: Pause/Ende sichtbar
     if (adminRoundStatus) {
@@ -403,7 +416,12 @@ window.changeLives = (id, amount) => {
 // --- RUNDENMODUS & LIMITS (Modal) ---
 const applySettingsToDb = () => {
     const mode = modeQuestionsRadio && modeQuestionsRadio.checked ? "questions" : "time";
-    const timeLimit = parseInt(timeLimitInput?.value || currentTimeLimit, 10) || 150;
+    const minutes = parseInt(timeMinutesInput?.value ?? "", 10);
+    const seconds = parseInt(timeSecondsInput?.value ?? "", 10);
+    let timeLimit = 0;
+    if (!isNaN(minutes)) timeLimit += minutes * 60;
+    if (!isNaN(seconds)) timeLimit += seconds;
+    if (timeLimit <= 0) timeLimit = currentTimeLimit || 150;
     const maxQ = parseInt(maxQuestionsInput?.value || currentMaxQuestions, 10) || 5;
 
     currentMode = mode;
