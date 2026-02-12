@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0a0a">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>PLAYER | v4.7.3</title>
+    <title>PLAYER | v4.7.5</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,7 @@
     </div>
 
     <footer>
-        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.7.3 · by Julian Scherer</p>
+        <p class="text-[8px] tracking-[0.4em] font-black text-white/20 uppercase">Spieler v4.7.5 · by Julian Scherer</p>
     </footer>
 
     <script type="module">
@@ -267,19 +267,40 @@
             statusBar.textContent = statusText;
             statusBar.className = "w-full text-center py-3 px-4 rounded-xl text-sm font-black uppercase tracking-widest border-2 transition-colors " + statusClass;
 
-            // TIMER SYNC (bei Pause/Ende deutliche Anzeige)
-            playerUi.innerText = gs.playerTimer !== undefined ? gs.playerTimer : 30;
-            const rt = gs.roundTimer || 0;
+            // TIMER / FRAGEN SYNC je nach Modus
+            const settings = data.settings || {};
+            const mode = settings.mode || "time";
             const baseRoundClass = "px-6 py-2 rounded-full text-[10px] font-mono font-bold uppercase tracking-widest flex justify-center";
-            if (gs.active && gs.isPaused) {
-                roundUi.innerText = "⏸ PAUSIERT";
-                roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
-            } else if (!gs.active) {
-                roundUi.innerText = "— Runde beendet —";
-                roundUi.className = baseRoundClass + " glass border border-white/20 text-white/50";
+            const rt = gs.roundTimer || 0;
+
+            if (mode === "questions") {
+                // Fragen-Modus: Timer ausblenden, Fragen anzeigen
+                const questionsLeft = typeof me.questionsLeft === "number" ? me.questionsLeft : settings.maxQuestions || 0;
+                playerUi.innerText = `Noch ${questionsLeft} Frage${questionsLeft === 1 ? '' : 'n'}`;
+
+                if (gs.active && gs.isPaused) {
+                    roundUi.innerText = "⏸ FRAGEN-MODUS / PAUSE";
+                    roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
+                } else if (!gs.active) {
+                    roundUi.innerText = "FRAGEN-MODUS – Runde beendet";
+                    roundUi.className = baseRoundClass + " glass border border-white/20 text-white/50";
+                } else {
+                    roundUi.innerText = "FRAGEN-MODUS AKTIV";
+                    roundUi.className = baseRoundClass + " glass text-white border border-white/5";
+                }
             } else {
-                roundUi.innerText = `RUNDE: ${Math.floor(rt/60)}:${(rt%60).toString().padStart(2,'0')}`;
-                roundUi.className = baseRoundClass + " glass text-white border border-white/5";
+                // Zeit-Modus wie bisher
+                playerUi.innerText = gs.playerTimer !== undefined ? gs.playerTimer : 30;
+                if (gs.active && gs.isPaused) {
+                    roundUi.innerText = "⏸ PAUSIERT";
+                    roundUi.className = baseRoundClass + " bg-amber-900/30 border-2 border-amber-500/50 text-amber-200";
+                } else if (!gs.active) {
+                    roundUi.innerText = "— Runde beendet —";
+                    roundUi.className = baseRoundClass + " glass border border-white/20 text-white/50";
+                } else {
+                    roundUi.innerText = `RUNDE: ${Math.floor(rt/60)}:${(rt%60).toString().padStart(2,'0')}`;
+                    roundUi.className = baseRoundClass + " glass text-white border border-white/5";
+                }
             }
 
             // DRAN STATUS (ROT LEUCHTEN)
@@ -407,6 +428,25 @@
                 }
             }
         });
+
+        // Hook: Externe Chat-Integration kann diese Funktion aufrufen,
+        // um im Fragen-Modus eine gestellte Frage zu registrieren.
+        window.registerQuestion = () => {
+            onValue(ref(db), (snap) => {
+                const data = snap.val();
+                if (!data || !data.players || !myId || !data.players[myId]) return;
+
+                const settings = data.settings || {};
+                const mode = settings.mode || "time";
+                if (mode !== "questions") return;
+
+                const me = data.players[myId];
+                const current = typeof me.questionsLeft === "number" ? me.questionsLeft : settings.maxQuestions || 0;
+                const next = Math.max(0, current - 1);
+
+                update(ref(db, `players/${myId}`), { questionsLeft: next });
+            }, { onlyOnce: true });
+        };
     </script>
 </body>
 </html>

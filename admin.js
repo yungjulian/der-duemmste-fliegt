@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.7.3";
+const VERSION = "4.7.5";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -12,6 +12,14 @@ const adminHeaderVersion = document.getElementById('admin-header-version');
 if (adminHeaderVersion) adminHeaderVersion.textContent = `Version ${VERSION}`;
 
 const adminRoundStatus = document.getElementById('admin-round-status');
+const openModeBtn = document.getElementById('open-mode-modal');
+const modeModal = document.getElementById('mode-modal');
+const modeTimeRadio = document.getElementById('mode-time');
+const modeQuestionsRadio = document.getElementById('mode-questions');
+const timeLimitInput = document.getElementById('time-limit');
+const maxQuestionsInput = document.getElementById('max-questions');
+const modeCancelBtn = document.getElementById('mode-cancel');
+const modeSaveBtn = document.getElementById('mode-save');
 
 const playerListDiv = document.getElementById('admin-player-list');
 const roundTimerDisplay = document.getElementById('round-timer');
@@ -32,6 +40,9 @@ const nextPlayerBtn = document.getElementById('next-player-btn');
 let roundInterval = null, playerInterval = null, voteInterval = null;
 let currentRoundTime = 150, currentPlayerTime = 30, currentVoteTime = 60;
 let lastActiveId = null;
+let currentMode = "time";
+let currentTimeLimit = 150;
+let currentMaxQuestions = 5;
 
 const formatTime = (t) => {
     const m = Math.floor(t / 60); const s = t % 60;
@@ -42,21 +53,24 @@ const formatTime = (t) => {
 function startLogic() {
     if (roundInterval) clearInterval(roundInterval);
     if (playerInterval) clearInterval(playerInterval);
-    
-    roundInterval = setInterval(() => {
-        if (currentRoundTime > 0) {
-            currentRoundTime--;
-            update(ref(db, 'gameState'), { roundTimer: currentRoundTime });
-        }
-    }, 1000);
 
-    playerInterval = setInterval(() => {
-        if (currentPlayerTime > 0) {
-            currentPlayerTime--;
-            update(ref(db, 'gameState'), { playerTimer: currentPlayerTime });
-            if (currentPlayerTime === 0) window.skipPlayer();
-        }
-    }, 1000);
+    // Timer nur im Zeit-Modus laufen lassen
+    if (currentMode === "time") {
+        roundInterval = setInterval(() => {
+            if (currentRoundTime > 0) {
+                currentRoundTime--;
+                update(ref(db, 'gameState'), { roundTimer: currentRoundTime });
+            }
+        }, 1000);
+
+        playerInterval = setInterval(() => {
+            if (currentPlayerTime > 0) {
+                currentPlayerTime--;
+                update(ref(db, 'gameState'), { playerTimer: currentPlayerTime });
+                if (currentPlayerTime === 0) window.skipPlayer();
+            }
+        }, 1000);
+    }
 }
 
 function stopLogic() {
@@ -89,12 +103,25 @@ function stopVoteTimer() {
 onValue(ref(db), (snap) => {
     const data = snap.val(); if (!data) return;
     const gs = data.gameState || {}; const players = data.players || {};
+    const settings = data.settings || {};
+
+    currentMode = settings.mode || "time";
+    currentTimeLimit = settings.timeLimitSeconds || 150;
+    currentMaxQuestions = settings.maxQuestions || 5;
 
     currentRoundTime = gs.roundTimer !== undefined ? gs.roundTimer : currentRoundTime;
     currentPlayerTime = gs.playerTimer !== undefined ? gs.playerTimer : currentPlayerTime;
     currentVoteTime = gs.voteTimer !== undefined ? gs.voteTimer : currentVoteTime;
     roundTimerDisplay.innerText = formatTime(currentRoundTime);
     playerTimerDisplay.innerText = currentPlayerTime;
+
+    // Rundenmodus-UI (Modal) syncen
+    if (modeTimeRadio && modeQuestionsRadio) {
+        modeTimeRadio.checked = currentMode === "time";
+        modeQuestionsRadio.checked = currentMode === "questions";
+    }
+    if (timeLimitInput) timeLimitInput.value = currentTimeLimit;
+    if (maxQuestionsInput) maxQuestionsInput.value = currentMaxQuestions;
 
     // Admin: Pause/Ende sichtbar
     if (adminRoundStatus) {
@@ -337,13 +364,47 @@ window.changeLives = (id, amount) => {
     }, { onlyOnce: true });
 };
 
+// --- RUNDENMODUS & LIMITS (Modal) ---
+const applySettingsToDb = () => {
+    const mode = modeQuestionsRadio && modeQuestionsRadio.checked ? "questions" : "time";
+    const timeLimit = parseInt(timeLimitInput?.value || currentTimeLimit, 10) || 150;
+    const maxQ = parseInt(maxQuestionsInput?.value || currentMaxQuestions, 10) || 5;
+
+    currentMode = mode;
+    currentTimeLimit = timeLimit;
+    currentMaxQuestions = maxQ;
+
+    return update(ref(db, 'settings'), {
+        mode,
+        timeLimitSeconds: timeLimit,
+        maxQuestions: maxQ
+    });
+};
+
+if (openModeBtn && modeModal && modeCancelBtn && modeSaveBtn) {
+    openModeBtn.onclick = () => {
+        modeModal.classList.remove('hidden');
+    };
+    modeCancelBtn.onclick = () => {
+        modeModal.classList.add('hidden');
+    };
+    modeSaveBtn.onclick = () => {
+        applySettingsToDb().then(() => {
+            modeModal.classList.add('hidden');
+        });
+    };
+}
+
 startRoundBtn.onclick = () => {
     stopVoteTimer();
     remove(ref(db, 'votes'));
+
+    const initialRoundTime = currentMode === "time" ? currentTimeLimit : 0;
+
     update(ref(db, 'gameState'), {
         active: true,
         isPaused: false,
-        roundTimer: 150,
+        roundTimer: initialRoundTime,
         playerTimer: 30,
         votingActive: false,
         votingFinished: false,
@@ -359,6 +420,17 @@ startRoundBtn.onclick = () => {
         const hasDran = ids.some(id => p[id].isDran);
         const firstAlive = ids.find(id => (p[id].lives || 0) > 0);
         if (!hasDran && firstAlive) window.setDran(firstAlive);
+
+        // Im Fragen-Modus: questionsLeft für alle lebenden Spieler setzen
+        if (currentMode === "questions") {
+            const updates = {};
+            ids.forEach(id => {
+                if ((p[id].lives || 0) > 0) {
+                    updates[`players/${id}/questionsLeft`] = currentMaxQuestions;
+                }
+            });
+            if (Object.keys(updates).length) update(ref(db), updates);
+        }
     }, { onlyOnce: true });
 };
 
