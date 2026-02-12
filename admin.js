@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.7.1";
+const VERSION = "4.7.2";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -181,22 +181,40 @@ onValue(ref(db), (snap) => {
     const allIds = Object.keys(players);
     allIds.forEach(pid => { if (!order.includes(pid)) order.push(pid); });
 
+    // Lebende oben, Tote unten
+    const aliveOrdered = order.filter(id => players[id] && players[id].lives > 0);
+    const deadOrdered = order.filter(id => players[id] && players[id].lives <= 0);
+
     playerListDiv.innerHTML = '';
-    order.forEach(id => {
-        if (!players[id]) return;
+
+    const renderCard = (id) => {
         const p = players[id];
+        if (!p) return;
+
         if (p.isDran) lastActiveId = id;
         const isDead = p.lives <= 0;
         const card = document.createElement('div');
         card.className = `p-4 rounded-2xl border transition-all select-none ${p.isDran ? 'border-red-600 bg-red-900/20 ring-2' : 'border-white/10 bg-white/5'} ${isDead ? 'opacity-60' : ''}`;
         card.draggable = !isDead;
         card.dataset.playerId = id;
-        const hearts = p.lives > 0 ? "❤️".repeat(p.lives) : "☠️";
+
+        // Name verkleinern, wenn lang, damit Herzen+Stern in einer Zeile bleiben
+        const nameSizeClass = p.name && p.name.length > 10 ? 'text-xs' : 'text-sm';
+
+        // Leben als volle + leere Herzen (max 3 Slots)
+        const maxLives = 3;
+        const rawLives = typeof p.lives === 'number' ? p.lives : 0;
+        const clampedLives = Math.max(0, Math.min(rawLives, maxLives));
+        const fullHearts = "❤️".repeat(clampedLives);
+        const emptyHearts = "♡".repeat(maxLives - clampedLives);
+        const hearts = rawLives > 0 ? fullHearts + emptyHearts : "☠️";
+
         const jokerStar = p.jokerUsed ? "☆" : "⭐";
+
         card.innerHTML = `
             <div class="flex justify-between items-center mb-3">
-                <span class="font-black uppercase text-white">${p.name}</span>
-                <span class="text-red-500 font-bold flex items-center gap-0.5">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
+                <span class="font-black uppercase text-white ${nameSizeClass}">${p.name}</span>
+                <span class="text-red-500 font-bold flex items-center gap-0.5 whitespace-nowrap">${hearts} <span class="text-yellow-400/90">${jokerStar}</span></span>
             </div>
             <div class="grid grid-cols-2 gap-2">
                 ${isDead
@@ -204,11 +222,16 @@ onValue(ref(db), (snap) => {
                     : `<button onclick="window.setDran('${id}')" class="bg-blue-600 text-[9px] py-2 rounded font-bold text-white uppercase italic">An die Reihe</button>
                        <button onclick="window.resetJoker('${id}')" class="bg-yellow-600 text-[9px] py-2 rounded font-bold text-black uppercase">Joker Reset</button>
                        <button onclick="window.changeLives('${id}', -1)" class="bg-red-600 py-1 rounded text-white text-[9px]">-1 HP</button>
-                       <button onclick="window.changeLives('${id}', 1)" class="bg-green-600 py-1 rounded text-white text-[9px]">+1 HP</button>`
+                       <button onclick="window.changeLives('${id}', 1)" class="bg-green-600 py-1 rounded text-white text-[9px]">+1 HP</button>
+                       <button onclick="window.kickPlayer('${id}')" class="col-span-2 bg-white/10 hover:bg-red-700 text-[9px] py-2 rounded font-bold text-red-400 uppercase border border-red-700/60 mt-1">Kick</button>`
                 }
             </div>`;
         playerListDiv.appendChild(card);
-    });
+    };
+
+    // Zuerst alle lebenden Spieler, dann alle toten
+    aliveOrdered.forEach(renderCard);
+    deadOrdered.forEach(renderCard);
 
     // Drag & Drop für Reihenfolge
     let draggedId = null;
@@ -286,6 +309,32 @@ window.setDran = (id) => {
 
 window.resetJoker = (id) => update(ref(db, `players/${id}`), { jokerUsed: false });
 window.revivePlayer = (id) => update(ref(db, `players/${id}`), { lives: 3, jokerUsed: false });
+window.kickPlayer = (id) => {
+    onValue(ref(db), (snap) => {
+        const data = snap.val() || {};
+        const updates = {};
+
+        // Spieler entfernen
+        updates[`players/${id}`] = null;
+
+        // Votes bereinigen
+        const votes = data.votes || {};
+        Object.keys(votes).forEach(voterId => {
+            if (votes[voterId] === id) {
+                updates[`votes/${voterId}`] = null;
+            }
+        });
+
+        // Reihenfolge bereinigen
+        const gs = data.gameState || {};
+        if (Array.isArray(gs.playerOrder)) {
+            const newOrder = gs.playerOrder.filter(pid => pid !== id);
+            updates['gameState/playerOrder'] = newOrder;
+        }
+
+        update(ref(db), updates);
+    }, { onlyOnce: true });
+};
 window.changeLives = (id, amount) => {
     onValue(ref(db, `players/${id}/lives`), (s) => {
         update(ref(db, `players/${id}`), { lives: Math.max(0, (s.val() || 0) + amount) });
@@ -426,7 +475,6 @@ revealVoteBtn.onclick = () => {
         const data = snap.val() || {};
         const players = data.players || {};
         const votes = data.votes || {};
-        const gs = data.gameState || {};
 
         const aliveIds = Object.keys(players).filter(id => (players[id].lives || 0) > 0);
         const voteCounts = {};
@@ -440,8 +488,11 @@ revealVoteBtn.onclick = () => {
         const losers = counts.filter(x => x.c === maxCount).map(x => x.id);
 
         if (losers.length === 1 && aliveIds.length > 1) {
-            const newLives = Math.max(0, (players[losers[0]].lives || 0) - 1);
-            update(ref(db, `players/${losers[0]}`), { lives: newLives });
+            // Klarer Verlierer: 1 Leben abziehen und Ergebnisse anzeigen
+            const loserId = losers[0];
+            const newLives = Math.max(0, (players[loserId].lives || 0) - 1);
+            update(ref(db, `players/${loserId}`), { lives: newLives });
+            stopVoteTimer();
             update(ref(db, 'gameState'), {
                 votingTie: false,
                 votingActive: false,
@@ -450,18 +501,14 @@ revealVoteBtn.onclick = () => {
                 voteTimer: 0
             });
         } else {
-            // Stichen: Erst Votes löschen, dann Neuwahl starten – sonst beendet Sync das Voting sofort wieder
+            // Stechen: NUR Ergebnisse mit „STECHEN – Neuwählen“ anzeigen, KEIN neues Voting
             stopVoteTimer();
-            currentVoteTime = 60;
-            const tieUpdates = {
-                votingTie: false,
-                votingActive: true,
+            update(ref(db, 'gameState'), {
+                votingTie: true,
+                votingActive: false,
                 votingFinished: false,
-                showResults: false,
-                voteTimer: 60
-            };
-            remove(ref(db, 'votes')).then(() => {
-                update(ref(db, 'gameState'), tieUpdates);
+                showResults: true,
+                voteTimer: 0
             });
         }
     }, { onlyOnce: true });
