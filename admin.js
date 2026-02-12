@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.81";
+const VERSION = "4.82";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -42,6 +42,10 @@ const questionTextEl = document.getElementById('question-text');
 const questionAnswerEl = document.getElementById('question-answer');
 const questionProgressEl = document.getElementById('question-progress');
 const questionSkipBtn = document.getElementById('question-skip');
+const questionDifficultyEl = document.getElementById('question-difficulty');
+const diffLightInput = document.getElementById('diff-light');
+const diffMediumInput = document.getElementById('diff-medium');
+const diffHardInput = document.getElementById('diff-hard');
 
 let roundInterval = null, playerInterval = null, voteInterval = null;
 let currentRoundTime = 150, currentPlayerTime = 30, currentVoteTime = 60;
@@ -50,8 +54,10 @@ let currentMode = "time";
 let currentTimeLimit = 150;
 let currentMaxQuestions = 5;
 let currentPlayerPerQuestion = 30;
+let allQuestions = [];
 let questionDeck = [];
 let currentQuestionIndex = -1;
+let activeDifficulties = { Leicht: true, Mittel: true, Schwer: true };
 
 const formatTime = (t) => {
     const m = Math.floor(t / 60); const s = t % 60;
@@ -67,12 +73,27 @@ const shuffleArray = (arr) => {
     return a;
 };
 
+function rebuildQuestionDeck() {
+    if (!allQuestions || !allQuestions.length) return;
+    const filtered = allQuestions.filter(q => {
+        const diff = q.schwierigkeit || q.schwierigkeit === "" ? q.schwierigkeit : "Leicht";
+        return activeDifficulties[diff] !== false;
+    });
+    questionDeck = shuffleArray(filtered);
+    currentQuestionIndex = -1;
+    showNextQuestion();
+}
+
 function showNextQuestion() {
     if (!questionTextEl || !questionAnswerEl || !questionProgressEl) return;
     if (!questionDeck || questionDeck.length === 0) {
-        questionTextEl.textContent = "Keine Fragen geladen.";
+        questionTextEl.textContent = "Keine Fragen geladen (Filter zu streng?).";
         questionAnswerEl.textContent = "";
         questionProgressEl.textContent = "";
+        if (questionDifficultyEl) {
+            questionDifficultyEl.textContent = "–";
+            questionDifficultyEl.className = "px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] bg-white/10 text-white/40 border border-white/20";
+        }
         return;
     }
     currentQuestionIndex++;
@@ -83,6 +104,19 @@ function showNextQuestion() {
     questionTextEl.textContent = q.frage;
     questionAnswerEl.textContent = `Antwort (ID ${q.id}): ${q.antwort}`;
     questionProgressEl.textContent = `Frage ${currentQuestionIndex + 1} von ${questionDeck.length}`;
+
+    if (questionDifficultyEl) {
+        const diff = q.schwierigkeit || "Leicht";
+        questionDifficultyEl.textContent = diff;
+        let base = "px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-[0.2em] border ";
+        if (diff === "Leicht") {
+            questionDifficultyEl.className = base + "bg-emerald-900/40 text-emerald-300 border-emerald-500/40";
+        } else if (diff === "Mittel") {
+            questionDifficultyEl.className = base + "bg-amber-900/40 text-amber-300 border-amber-500/40";
+        } else {
+            questionDifficultyEl.className = base + "bg-red-900/40 text-red-300 border-red-500/40";
+        }
+    }
 }
 
 // --- TIMER ENGINE ---
@@ -124,9 +158,8 @@ fetch('./fragen.json')
     .then(r => r.json())
     .then(data => {
         if (Array.isArray(data) && data.length) {
-            questionDeck = shuffleArray(data);
-            currentQuestionIndex = -1;
-            showNextQuestion();
+            allQuestions = data;
+            rebuildQuestionDeck();
         }
     })
     .catch(() => {
@@ -138,6 +171,18 @@ fetch('./fragen.json')
 if (questionSkipBtn) {
     questionSkipBtn.onclick = () => showNextQuestion();
 }
+
+// Schwierigkeits-Filter Events
+const updateDifficultyFilter = () => {
+    activeDifficulties.Leicht = diffLightInput ? diffLightInput.checked : true;
+    activeDifficulties.Mittel = diffMediumInput ? diffMediumInput.checked : true;
+    activeDifficulties.Schwer = diffHardInput ? diffHardInput.checked : true;
+    rebuildQuestionDeck();
+};
+
+if (diffLightInput) diffLightInput.onchange = updateDifficultyFilter;
+if (diffMediumInput) diffMediumInput.onchange = updateDifficultyFilter;
+if (diffHardInput) diffHardInput.onchange = updateDifficultyFilter;
 
 function stopLogic() {
     clearInterval(roundInterval);

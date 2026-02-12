@@ -100,7 +100,7 @@
   {
     "id": 15,
     "frage": "Wer erfand die Glühbirne?",
-    "antwort": "Thomas Edison",
+    "antwort": "Joseph Swan erfand sie und Thomas Edison perfektionierte sie",
     "kategorie": "Geschichte",
     "schwierigkeit": "Leicht"
   },
@@ -156,7 +156,7 @@
   {
     "id": 23,
     "frage": "Was ist der längste Fluss der Welt?",
-    "antwort": "Nil (Amazonas wird oft auch akzeptiert)",
+    "antwort": "Nil (oder Amazonas)",
     "kategorie": "Geographie",
     "schwierigkeit": "Leicht"
   },
@@ -778,7 +778,7 @@
   },
   {
     "id": 112,
-    "frage": "Härtestes Gestein der Erde?",
+    "frage": "Härtestes natürliches Material der Erde?",
     "antwort": "Diamant",
     "kategorie": "Geologie",
     "schwierigkeit": "Leicht"
@@ -989,7 +989,7 @@
   {
     "id": 142,
     "frage": "In welchem Jahr fiel die Berliner Mauer?",
-    "antwort": "1889",
+    "antwort": "1989",
     "kategorie": "Geschichte",
     "schwierigkeit": "Leicht"
   },
@@ -1205,7 +1205,7 @@
   },
   {
     "id": 173,
-    "frage": "Was ist das Nationalgericht von Japan?",
+    "frage": "Was ist ein typisches Gericht aus Japan?",
     "antwort": "Sushi (oder Ramen)",
     "kategorie": "Kulinarik",
     "schwierigkeit": "Leicht"
@@ -1472,7 +1472,7 @@
   {
     "id": 211,
     "frage": "Welcher Planet ist der kälteste?",
-    "antwort": "Neptun (manchmal Uranus)",
+    "antwort": "Uranus (manchmal Neptun)",
     "kategorie": "Astronomie",
     "schwierigkeit": "Schwer"
   },
@@ -1752,7 +1752,7 @@
   {
     "id": 251,
     "frage": "Wie viele Bit hat ein Kilobit?",
-    "antwort": "1000 (oder 1024)",
+    "antwort": "1024",
     "kategorie": "Informatik",
     "schwierigkeit": "Mittel"
   },
@@ -1845,7 +1845,7 @@
     "frage": "Wie viele Monate haben 31 Tage?",
     "antwort": "7",
     "kategorie": "Mathematik",
-    "schwierigkeit": "Schwer"
+    "schwierigkeit": "Leicht"
   },
   {
     "id": 265,
