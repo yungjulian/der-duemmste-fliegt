@@ -1,6 +1,6 @@
 import { db, ref, set, onValue, update, remove } from "./firebase-config.js";
 
-const VERSION = "4.80";
+const VERSION = "4.81";
 
 // Footer Unit (Version + Credit)
 const footer = document.createElement('footer');
@@ -81,7 +81,7 @@ function showNextQuestion() {
     }
     const q = questionDeck[currentQuestionIndex];
     questionTextEl.textContent = q.frage;
-    questionAnswerEl.textContent = `Antwort: ${q.antwort}`;
+    questionAnswerEl.textContent = `Antwort (ID ${q.id}): ${q.antwort}`;
     questionProgressEl.textContent = `Frage ${currentQuestionIndex + 1} von ${questionDeck.length}`;
 }
 
@@ -661,15 +661,18 @@ nextPlayerBtn.onclick = () => window.skipPlayer();
 
 // --- VOTING-KONTROLLE ---
 startVoteBtn.onclick = () => {
-    currentVoteTime = 60;
     stopVoteTimer();
-    remove(ref(db, 'votes'));
-    update(ref(db, 'gameState'), {
-        votingActive: true,
-        votingFinished: false,
-        showResults: false,
-        votingTie: false,
-        voteTimer: currentVoteTime
+    // Erst Votes wirklich löschen, DANN Voting-Status setzen, um Race Conditions zu vermeiden
+    remove(ref(db, 'votes')).then(() => {
+        currentVoteTime = 60;
+        update(ref(db, 'gameState'), {
+            votingActive: true,
+            votingFinished: false,
+            showResults: false,
+            votingTie: false,
+            voteTimer: currentVoteTime
+        });
+        startVoteTimer();
     });
 };
 
@@ -741,6 +744,12 @@ resetDbBtn.onclick = () => {
     Promise.all([
         remove(ref(db, 'players')),
         remove(ref(db, 'votes')),
+        set(ref(db, 'settings'), {
+            mode: "time",
+            timeLimitSeconds: 150,
+            maxQuestions: 5,
+            playerTimeSeconds: 30
+        }),
         set(ref(db, 'gameState'), {
             active: false,
             isPaused: false,
